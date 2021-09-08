@@ -88,3 +88,5 @@ export class AmenityFinder extends LitElement {
     `;
   }
 }
+
+customElements.define('amenity-finder', AmenityFinder);
