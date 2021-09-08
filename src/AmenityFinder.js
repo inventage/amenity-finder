@@ -1,7 +1,5 @@
 import { LitElement, html, css } from 'lit';
 
-const logo = new URL('../assets/open-wc-logo.svg', import.meta.url).href;
-
 export class AmenityFinder extends LitElement {
   static get properties() {
     return {
@@ -62,7 +60,6 @@ export class AmenityFinder extends LitElement {
   render() {
     return html`
       <main>
-        <div class="logo"><img alt="open-wc logo" src=${logo} /></div>
         <h1>${this.title}</h1>
 
         <p>Edit <code>src/AmenityFinder.js</code> and save to reload.</p>
