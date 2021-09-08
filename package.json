@@ -11,7 +11,7 @@
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
     "analyze": "cem analyze --litelement",
     "start": "web-dev-server",
-    "deploy": "surge --domain itchy-frog.surge.sh dist"
+    "deploy": "npm run build && surge --domain itchy-frog.surge.sh dist"
   },
   "dependencies": {
     "lit": "^2.0.0-rc.4"
