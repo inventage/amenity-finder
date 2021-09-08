@@ -7,9 +7,8 @@
   "scripts": {
     "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
-    "build": "rimraf dist && rollup -c rollup.config.js && npm run analyze -- --exclude dist",
+    "build": "rimraf dist && rollup -c rollup.config.js -- --exclude dist",
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
-    "analyze": "cem analyze --litelement",
     "start": "web-dev-server",
     "deploy": "npm run build && surge --domain itchy-frog.surge.sh dist"
   },
@@ -18,7 +17,6 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.15.4",
-    "@custom-elements-manifest/analyzer": "^0.4.17",
     "@open-wc/building-rollup": "^1.10.0",
     "@open-wc/eslint-config": "^4.3.0",
     "@rollup/plugin-babel": "^5.3.0",
