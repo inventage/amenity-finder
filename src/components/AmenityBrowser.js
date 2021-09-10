@@ -63,10 +63,11 @@ export class AmenityBrowser extends LitElement {
 
     return html`${this.amenities.map(result => {
       const {
+        distance,
         tags: { name },
       } = result;
 
-      return html`<amenity-item .name="${name}"></amenity-item>`;
+      return html`<amenity-item .name="${name}" .distance="${distance}"></amenity-item>`;
     })}`;
   }
 

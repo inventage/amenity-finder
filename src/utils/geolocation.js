@@ -1,3 +1,5 @@
+import LatLon from 'geodesy/latlon-ellipsoidal-vincenty';
+
 /**
  * Returns true if the current agent supports geolocation.
  *
@@ -25,4 +27,11 @@ const detectUserLocation = () =>
     );
   });
 
-export { canGeolocate, detectUserLocation };
+const distanceBetween = ([lat1, lon1], [lat2, lng2]) => {
+  const p1 = new LatLon(lat1, lon1);
+  const p2 = new LatLon(lat2, lng2);
+
+  return p1.distanceTo(p2);
+};
+
+export { canGeolocate, detectUserLocation, distanceBetween };

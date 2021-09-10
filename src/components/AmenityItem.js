@@ -4,6 +4,7 @@ export class AmenityItem extends LitElement {
   static get properties() {
     return {
       name: { type: String },
+      distance: { type: String },
     };
   }
 
@@ -21,6 +22,10 @@ export class AmenityItem extends LitElement {
       .amenity-item > .name {
         font-size: 125%;
       }
+
+      .amenity-item > .distance {
+        color: #6a7071;
+      }
     `;
   }
 
@@ -28,6 +33,7 @@ export class AmenityItem extends LitElement {
     super();
 
     this.name = '';
+    this.distance = '';
   }
 
   render() {
@@ -37,6 +43,7 @@ export class AmenityItem extends LitElement {
 
     return html`<div class="amenity-item">
       <span class="name">${this.name}</span>
+      <span class="distance">${Number.parseFloat(this.distance).toFixed(2)} m</span>
     </div>`;
   }
 }

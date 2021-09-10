@@ -4,6 +4,7 @@ import { OverpassApi } from '../services/OverpassApi.js';
 
 import '../components/AmenityBrowser.js';
 import '../components/AmenityItem.js';
+import { distanceBetween } from '../utils/geolocation.js';
 
 export class ResultsView extends LitElement {
   static get properties() {
@@ -63,7 +64,13 @@ export class ResultsView extends LitElement {
 
   async _fetchResults() {
     try {
-      this.results = await this.api.getNodeByLatLng(this.latitude, this.longitude, this.radius);
+      const results = await this.api.getNodeByLatLng(this.latitude, this.longitude, this.radius);
+      this.results = results
+        .map(result => ({
+          ...result,
+          distance: distanceBetween([this.latitude, this.longitude], [result.lat, result.lon]),
+        }))
+        .sort((a, b) => a.distance - b.distance);
     } catch (err) {
       console.error(err);
     }

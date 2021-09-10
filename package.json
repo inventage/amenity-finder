@@ -76,6 +76,7 @@
     "@material/mwc-list": "^0.22.1",
     "@material/mwc-textfield": "^0.22.1",
     "@material/mwc-top-app-bar": "^0.22.1",
+    "geodesy": "^2.2.1",
     "lit": "^2.0.0-rc.4",
     "lit-html": "^1.4.1",
     "page": "^1.11.6"
