@@ -37,25 +37,12 @@ export class AmenityFinder extends LitElement {
 
   render() {
     return html`
-      <mwc-drawer
-        hasHeader
-        type="modal"
-        .open="${this.showSidebar}"
-        @MDCDrawer:closed="${() => {
-          this.showSidebar = false;
-        }}"
-      >
+      <mwc-drawer hasHeader type="modal" .open="${this.showSidebar}" @MDCDrawer:closed="${this._closeSidebar}">
         <span slot="title">Navigation</span>
         <mwc-list>
-          <mwc-list-item @click="${() => this._navigateTo('home')}"
-            >Home</mwc-list-item
-          >
-          <mwc-list-item @click="${() => this._navigateTo('search')}"
-            >Search</mwc-list-item
-          >
-          <mwc-list-item @click="${() => this._navigateTo('results')}"
-            >Results</mwc-list-item
-          >
+          <mwc-list-item @click="${() => this._navigateToUrl('/')}">Home</mwc-list-item>
+          <mwc-list-item @click="${() => this._navigateToUrl('/search')}">Search</mwc-list-item>
+          <mwc-list-item @click="${() => this._navigateToUrl('/results')}">Results</mwc-list-item>
         </mwc-list>
         <div slot="appContent">
           <mwc-top-app-bar>
@@ -87,9 +74,9 @@ export class AmenityFinder extends LitElement {
     }
   }
 
-  _navigateTo(view) {
-    this.currentView = view;
-    this.showSidebar = false;
+  _navigateToUrl(url) {
+    page(url);
+    this._closeSidebar();
   }
 
   _initializeRoutes() {
@@ -103,6 +90,10 @@ export class AmenityFinder extends LitElement {
       this.currentView = 'search';
     });
     page();
+  }
+
+  _closeSidebar() {
+    this.showSidebar = false;
   }
 }
 
