@@ -100,7 +100,9 @@ export class AmenityFinder extends LitElement {
           @execute-search="${e => this._onExecuteSearch(e)}"
         ></search-view>`;
       case 'results':
-        return html`<results-view .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}"></results-view>`;
+        return html`<results-view .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}">
+          <p><a href="${`/search/${this.latitude}/${this.longitude}/${this.radius}`}">← Back to search</a></p>
+        </results-view>`;
       default:
         return ``;
     }
@@ -118,7 +120,20 @@ export class AmenityFinder extends LitElement {
 
       page.redirect('/search');
     });
+    page('/results/:lat/:lon/:radius', ctx => {
+      this._setSearchParametersFromRouteContext(ctx);
+      this.currentView = 'results';
+    });
     page('/search', () => {
+      if (this.alreadySearched) {
+        page.redirect(`/search/${this.latitude}/${this.longitude}/${this.radius}`);
+        return;
+      }
+
+      this.currentView = 'search';
+    });
+    page('/search/:lat/:lon/:radius', ctx => {
+      this._setSearchParametersFromRouteContext(ctx);
       this.currentView = 'search';
     });
     page();
