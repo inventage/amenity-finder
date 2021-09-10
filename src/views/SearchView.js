@@ -14,14 +14,6 @@ export class SearchView extends LitElement {
     };
   }
 
-  constructor() {
-    super();
-
-    this.latitude = '47.3902';
-    this.longitude = '8.5158';
-    this.radius = 1000;
-  }
-
   render() {
     return html`
       <h1>Search</h1>
@@ -41,22 +33,6 @@ export class SearchView extends LitElement {
         updatecenteronclick
       ></leaflet-map>
     `;
-  }
-
-  _triggerSearch() {
-    this.dispatchEvent(
-      new CustomEvent('execute-search', {
-        detail: {
-          latitude: this.latitude,
-          longitude: this.longitude,
-          radius: this.radius,
-        },
-      })
-    );
-  }
-
-  _canSearch() {
-    return this.latitude && this.longitude && this.radius;
   }
 
   async _handleLocateMeClick(e) {
@@ -85,6 +61,22 @@ export class SearchView extends LitElement {
 
     this.latitude = latitude;
     this.longitude = longitude;
+  }
+
+  _triggerSearch() {
+    this.dispatchEvent(
+      new CustomEvent('execute-search', {
+        detail: {
+          latitude: this.latitude,
+          longitude: this.longitude,
+          radius: this.radius,
+        },
+      })
+    );
+  }
+
+  _canSearch() {
+    return this.latitude && this.longitude && this.radius;
   }
 }
 
