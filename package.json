@@ -10,17 +10,34 @@
     "build": "rimraf dist && rollup -c rollup.config.js",
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
     "start": "web-dev-server",
-    "deploy": "npm run build && surge --domain itchy-frog.surge.sh dist"
+    "deploy": "npm run build && surge --domain itchy-frog.surge.sh dist",
+    "test": "web-test-runner --coverage",
+    "test:watch": "web-test-runner --watch"
+  },
+  "dependencies": {
+    "@inventage/leaflet-map": "^0.7.0",
+    "@material/mwc-button": "^0.22.1",
+    "@material/mwc-drawer": "^0.22.1",
+    "@material/mwc-icon-button": "^0.22.1",
+    "@material/mwc-list": "^0.22.1",
+    "@material/mwc-textfield": "^0.22.1",
+    "@material/mwc-top-app-bar": "^0.22.1",
+    "geodesy": "^2.2.1",
+    "lit": "^2.0.0-rc.4",
+    "lit-html": "^1.4.1",
+    "page": "^1.11.6"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.15.4",
     "@open-wc/building-rollup": "^1.10.0",
     "@open-wc/eslint-config": "^4.3.0",
+    "@open-wc/testing": "next",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@web/dev-server": "^0.1.22",
     "@web/rollup-plugin-html": "^1.10.1",
     "@web/rollup-plugin-import-meta-assets": "^1.0.7",
+    "@web/test-runner": "^0.13.17",
     "babel-plugin-template-html-minifier": "^4.1.0",
     "deepmerge": "^4.2.2",
     "eslint": "^7.32.0",
@@ -75,18 +92,5 @@
       "prettier --write"
     ]
   },
-  "customElements": "custom-elements.json",
-  "dependencies": {
-    "@inventage/leaflet-map": "^0.7.0",
-    "@material/mwc-button": "^0.22.1",
-    "@material/mwc-drawer": "^0.22.1",
-    "@material/mwc-icon-button": "^0.22.1",
-    "@material/mwc-list": "^0.22.1",
-    "@material/mwc-textfield": "^0.22.1",
-    "@material/mwc-top-app-bar": "^0.22.1",
-    "geodesy": "^2.2.1",
-    "lit": "^2.0.0-rc.4",
-    "lit-html": "^1.4.1",
-    "page": "^1.11.6"
-  }
+  "customElements": "custom-elements.json"
 }
