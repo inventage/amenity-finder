@@ -33,7 +33,13 @@ export class SearchView extends LitElement {
       <mwc-button outlined label="Locate Me" icon="my_location" @click="${this._handleLocateMeClick}" .disabled="${!canGeolocate()}"></mwc-button>
       <mwc-button raised label="Search" @click="${this._triggerSearch}" .disabled="${!this._canSearch()}"></mwc-button>
 
-      <leaflet-map .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}"></leaflet-map>
+      <leaflet-map
+        .latitude="${this.latitude}"
+        .longitude="${this.longitude}"
+        .radius="${this.radius}"
+        @center-updated="${this._updateLatitudeLongitudeFromMap}"
+        updatecenteronclick
+      ></leaflet-map>
     `;
   }
 
@@ -66,6 +72,19 @@ export class SearchView extends LitElement {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  _updateLatitudeLongitudeFromMap(e) {
+    const {
+      detail: { latitude, longitude },
+    } = e;
+
+    if (!latitude || !longitude) {
+      return;
+    }
+
+    this.latitude = latitude;
+    this.longitude = longitude;
   }
 }
 
