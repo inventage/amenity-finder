@@ -5,6 +5,8 @@ import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
 
+import page from 'page';
+
 import './views/HomeView.js';
 import './views/SearchView.js';
 import './views/ResultsView.js';
@@ -29,6 +31,8 @@ export class AmenityFinder extends LitElement {
     super();
     this.showSidebar = false;
     this.currentView = 'home';
+
+    this._initializeRoutes();
   }
 
   render() {
@@ -86,6 +90,19 @@ export class AmenityFinder extends LitElement {
   _navigateTo(view) {
     this.currentView = view;
     this.showSidebar = false;
+  }
+
+  _initializeRoutes() {
+    page('/', () => {
+      this.currentView = 'home';
+    });
+    page('/results', () => {
+      this.currentView = 'results';
+    });
+    page('/search', () => {
+      this.currentView = 'search';
+    });
+    page();
   }
 }
 
