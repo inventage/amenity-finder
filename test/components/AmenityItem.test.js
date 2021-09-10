@@ -6,6 +6,7 @@ import '../../src/components/AmenityItem.js';
 const result = {
   name: 'Some name',
   distance: '1250',
+  distanceFormatted: '1.25 km',
 };
 
 describe('<amenity-item>', () => {
@@ -25,7 +26,7 @@ describe('<amenity-item>', () => {
       expect(el.shadowRoot.querySelector('.amenity-item')).dom.to.equal(`
         <div class="amenity-item">
             <span class="name">${result.name}</span>
-            <span class="distance">${result.distance}.00 m</span>
+            <span class="distance">${result.distanceFormatted}</span>
         </div>
       `);
     });

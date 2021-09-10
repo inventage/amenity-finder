@@ -1,5 +1,6 @@
 import { css, html, LitElement, nothing } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
+import { formatDistance } from '../utils/helpers.js';
 
 export class AmenityItem extends LitElement {
   static get properties() {
@@ -54,7 +55,7 @@ export class AmenityItem extends LitElement {
 
     return html`<div class="amenity-item ${classMap({ '-selected': this.selected })}">
       <span class="name">${this.name}</span>
-      <span class="distance">${Number.parseFloat(this.distance).toFixed(2)} m</span>
+      <span class="distance">${formatDistance(this.distance)}</span>
     </div>`;
   }
 }
