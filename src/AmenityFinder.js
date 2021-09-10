@@ -94,7 +94,8 @@ export class AmenityFinder extends LitElement {
     page('/', () => {
       this.currentView = 'home';
     });
-    page('/results', () => {
+    page('/results/:lat/:lon/:radius', ctx => {
+      this._setSearchParametersFromRouteContext(ctx);
       this.currentView = 'results';
     });
     page('/search', () => {
@@ -112,11 +113,23 @@ export class AmenityFinder extends LitElement {
     this.showSidebar = false;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   _onExecuteSearch(e) {
-    this.latitude = e.detail.latitude;
-    this.longitude = e.detail.longitude;
-    this.radius = e.detail.radius;
-    this.currentView = 'results';
+    page(`/results/${e.detail.latitude}/${e.detail.longitude}/${e.detail.radius}`);
+  }
+
+  _setSearchParametersFromRouteContext(ctx) {
+    const {
+      params: { radius, lat, lon },
+    } = ctx;
+
+    if (!radius || !lat || !lon) {
+      return;
+    }
+
+    this.radius = radius;
+    this.latitude = lat;
+    this.longitude = lon;
   }
 }
 
