@@ -27,6 +27,16 @@ const detectUserLocation = () =>
     );
   });
 
+/**
+ * Returns the distance in meters between two [lat, lng] points.
+ *
+ * @param lat1
+ * @param lon1
+ * @param lat2
+ * @param lng2
+ *
+ * @returns {number}
+ */
 const distanceBetween = ([lat1, lon1], [lat2, lng2]) => {
   const p1 = new LatLon(lat1, lon1);
   const p2 = new LatLon(lat2, lng2);

@@ -61,7 +61,7 @@ export class ResultsView extends LitElement {
         </p>
         <slot></slot>
       </div>
-      <amenity-browser .amenities='${this.results}' .latitude='${this.latitude}' .longitude='${this.longitude}' .radius='${this.radius}'></amenity-browser>
+      <amenity-browser .amenities="${this.results}" .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}"></amenity-browser>
     `;
   }
 

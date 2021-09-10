@@ -32,6 +32,7 @@ export class AmenityItem extends LitElement {
       .amenity-item.-selected {
         background-color: hsl(0, 0%, 92%);
       }
+
       .amenity-item.-selected > .distance {
         color: #535859;
       }
