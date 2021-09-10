@@ -5,12 +5,15 @@ import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
 
+import './views/HomeView.js';
+import './views/SearchView.js';
+import './views/ResultsView.js';
+
 export class AmenityFinder extends LitElement {
   static get properties() {
     return {
-      showSidebar: {
-        type: Boolean,
-      },
+      showSidebar: { type: Boolean },
+      currentView: { type: String },
     };
   }
 
@@ -25,6 +28,7 @@ export class AmenityFinder extends LitElement {
   constructor() {
     super();
     this.showSidebar = false;
+    this.currentView = 'home';
   }
 
   render() {
@@ -39,9 +43,15 @@ export class AmenityFinder extends LitElement {
       >
         <span slot="title">Navigation</span>
         <mwc-list>
-          <mwc-list-item>Home</mwc-list-item>
-          <mwc-list-item>Search</mwc-list-item>
-          <mwc-list-item>Results</mwc-list-item>
+          <mwc-list-item @click="${() => this._navigateTo('home')}"
+            >Home</mwc-list-item
+          >
+          <mwc-list-item @click="${() => this._navigateTo('search')}"
+            >Search</mwc-list-item
+          >
+          <mwc-list-item @click="${() => this._navigateTo('results')}"
+            >Results</mwc-list-item
+          >
         </mwc-list>
         <div slot="appContent">
           <mwc-top-app-bar>
@@ -54,12 +64,28 @@ export class AmenityFinder extends LitElement {
             ></mwc-icon-button>
             <div slot="title">Title</div>
           </mwc-top-app-bar>
-          <div>
-            <p>Main Content!</p>
-          </div>
+          <div>${this._renderCurrentView()}</div>
         </div>
       </mwc-drawer>
     `;
+  }
+
+  _renderCurrentView() {
+    switch (this.currentView) {
+      case 'home':
+        return html`<home-view></home-view>`;
+      case 'search':
+        return html`<search-view></search-view>`;
+      case 'results':
+        return html`<results-view></results-view>`;
+      default:
+        return ``;
+    }
+  }
+
+  _navigateTo(view) {
+    this.currentView = view;
+    this.showSidebar = false;
   }
 }
 
