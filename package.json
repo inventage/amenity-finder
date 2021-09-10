@@ -12,9 +12,6 @@
     "start": "web-dev-server",
     "deploy": "npm run build && surge --domain itchy-frog.surge.sh dist"
   },
-  "dependencies": {
-    "lit": "^2.0.0-rc.4"
-  },
   "devDependencies": {
     "@babel/preset-env": "^7.15.4",
     "@open-wc/building-rollup": "^1.10.0",
@@ -57,5 +54,11 @@
       "prettier --write"
     ]
   },
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "dependencies": {
+    "@material/mwc-drawer": "^0.22.1",
+    "@material/mwc-top-app-bar": "^0.22.1",
+    "lit": "^2.0.0-rc.4",
+    "lit-html": "^1.4.1"
+  }
 }
