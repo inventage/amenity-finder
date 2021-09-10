@@ -39,7 +39,16 @@
       "prettier"
     ],
     "rules": {
-      "no-return-assign": "off"
+      "no-return-assign": "off",
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "info",
+            "error"
+          ]
+        }
+      ]
     }
   },
   "prettier": {

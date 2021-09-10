@@ -3,6 +3,8 @@ import '@material/mwc-button';
 import '@material/mwc-textfield';
 import '@inventage/leaflet-map';
 
+import { canGeolocate, detectUserLocation } from '../utils/geolocation.js';
+
 export class SearchView extends LitElement {
   static get properties() {
     return {
@@ -28,7 +30,7 @@ export class SearchView extends LitElement {
       <mwc-textfield label="Longitude" .value="${this.longitude}" @keyup="${e => (this.longitude = e.target.value)}"></mwc-textfield>
       <mwc-textfield label="Radius (m)" .value="${this.radius}" @keyup="${e => (this.radius = e.target.value)}"></mwc-textfield>
 
-      <mwc-button outlined label="Locate Me" icon="my_location"></mwc-button>
+      <mwc-button outlined label="Locate Me" icon="my_location" @click="${this._handleLocateMeClick}" .disabled="${!canGeolocate()}"></mwc-button>
       <mwc-button raised label="Search" @click="${this._triggerSearch}" .disabled="${!this._canSearch()}"></mwc-button>
 
       <leaflet-map .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}"></leaflet-map>
@@ -49,6 +51,21 @@ export class SearchView extends LitElement {
 
   _canSearch() {
     return this.latitude && this.longitude && this.radius;
+  }
+
+  async _handleLocateMeClick(e) {
+    e.target.blur();
+
+    try {
+      const {
+        coords: { latitude, longitude },
+      } = await detectUserLocation();
+
+      this.latitude = latitude;
+      this.longitude = longitude;
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
 
