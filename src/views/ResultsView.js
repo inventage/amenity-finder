@@ -2,6 +2,9 @@ import { html, LitElement } from 'lit';
 
 import { OverpassApi } from '../services/OverpassApi.js';
 
+import '../components/AmenityBrowser.js';
+import '../components/AmenityItem.js';
+
 export class ResultsView extends LitElement {
   static get properties() {
     return {
@@ -33,23 +36,8 @@ export class ResultsView extends LitElement {
         <code>longitude</code> = <code>${this.longitude}</code> and
         <code>radius</code> = <code>${this.radius}</code>
       </p>
-      ${this.results.map(result => this._resultTemplate(result))}
+      <amenity-browser .amenities="${this.results}" .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}"></amenity-browser>
     `;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  _resultTemplate(result) {
-    const {
-      lat,
-      lon,
-      id,
-      tags: { name },
-    } = result;
-
-    return html`<p>
-      ${id}, ${lat}, ${lon}<br />
-      ${name}
-    </p> `;
   }
 
   async _fetchResults() {
