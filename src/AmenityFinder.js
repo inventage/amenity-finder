@@ -1,15 +1,15 @@
 import { LitElement, html, css } from 'lit';
+import page from 'page';
+
 import '@material/mwc-drawer';
 import '@material/mwc-top-app-bar';
 import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
 
-import page from 'page';
-
 import './views/HomeView.js';
-import './views/SearchView.js';
 import './views/ResultsView.js';
+import './views/SearchView.js';
 
 export class AmenityFinder extends LitElement {
   static get properties() {
@@ -23,6 +23,10 @@ export class AmenityFinder extends LitElement {
     return css`
       :host {
         min-height: 100vh;
+      }
+
+      main {
+        padding: var(--amenity-container-padding, 1rem);
       }
     `;
   }
@@ -55,7 +59,7 @@ export class AmenityFinder extends LitElement {
             ></mwc-icon-button>
             <div slot="title">Title</div>
           </mwc-top-app-bar>
-          <div>${this._renderCurrentView()}</div>
+          <main>${this._renderCurrentView()}</main>
         </div>
       </mwc-drawer>
     `;
@@ -74,11 +78,6 @@ export class AmenityFinder extends LitElement {
     }
   }
 
-  _navigateToUrl(url) {
-    page(url);
-    this._closeSidebar();
-  }
-
   _initializeRoutes() {
     page('/', () => {
       this.currentView = 'home';
@@ -90,6 +89,11 @@ export class AmenityFinder extends LitElement {
       this.currentView = 'search';
     });
     page();
+  }
+
+  _navigateToUrl(url) {
+    page(url);
+    this._closeSidebar();
   }
 
   _closeSidebar() {
