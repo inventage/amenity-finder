@@ -16,6 +16,9 @@ export class AmenityFinder extends LitElement {
     return {
       showSidebar: { type: Boolean },
       currentView: { type: String },
+      latitude: { type: String },
+      longitude: { type: String },
+      radius: { type: Number },
     };
   }
 
@@ -35,6 +38,10 @@ export class AmenityFinder extends LitElement {
     super();
     this.showSidebar = false;
     this.currentView = 'home';
+
+    this.latitude = '47.3902';
+    this.longitude = '8.5158';
+    this.radius = 1000;
 
     this._initializeRoutes();
   }
@@ -70,7 +77,12 @@ export class AmenityFinder extends LitElement {
       case 'home':
         return html`<home-view></home-view>`;
       case 'search':
-        return html`<search-view></search-view>`;
+        return html`<search-view
+          .latitude="${this.latitude}"
+          .longitude="${this.longitude}"
+          .radius="${this.radius}"
+          @execute-search="${e => this._onExecuteSearch(e)}"
+        ></search-view>`;
       case 'results':
         return html`<results-view></results-view>`;
       default:
@@ -98,6 +110,13 @@ export class AmenityFinder extends LitElement {
 
   _closeSidebar() {
     this.showSidebar = false;
+  }
+
+  _onExecuteSearch(e) {
+    this.latitude = e.detail.latitude;
+    this.longitude = e.detail.longitude;
+    this.radius = e.detail.radius;
+    this.currentView = 'results';
   }
 }
 
