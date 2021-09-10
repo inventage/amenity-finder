@@ -3,6 +3,7 @@ import '@material/mwc-drawer';
 import '@material/mwc-top-app-bar';
 import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
+import '@material/mwc-icon-button';
 
 export class AmenityFinder extends LitElement {
   static get styles() {
