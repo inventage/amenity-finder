@@ -60,6 +60,7 @@
   },
   "customElements": "custom-elements.json",
   "dependencies": {
+    "@inventage/leaflet-map": "^0.7.0",
     "@material/mwc-button": "^0.22.1",
     "@material/mwc-drawer": "^0.22.1",
     "@material/mwc-icon-button": "^0.22.1",
