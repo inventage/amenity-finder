@@ -25,11 +25,25 @@ export class AmenityFinder extends LitElement {
   static get styles() {
     return css`
       :host {
-        min-height: 100vh;
+        --amenity-container-padding: 1rem;
       }
 
       main {
         padding: var(--amenity-container-padding, 1rem);
+        box-sizing: border-box;
+        display: flex;
+        flex: 1;
+        max-height: calc(100vh - 64px);
+      }
+
+      [slot='appContent'] {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        /* fixes issues where content would overlay sidebar */
+        z-index: 1;
+        position: relative;
       }
     `;
   }
