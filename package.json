@@ -57,6 +57,7 @@
   "customElements": "custom-elements.json",
   "dependencies": {
     "@material/mwc-drawer": "^0.22.1",
+    "@material/mwc-icon-button": "^0.22.1",
     "@material/mwc-list": "^0.22.1",
     "@material/mwc-top-app-bar": "^0.22.1",
     "lit": "^2.0.0-rc.4",
