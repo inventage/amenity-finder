@@ -16,6 +16,7 @@ export class AmenityFinder extends LitElement {
     return {
       showSidebar: { type: Boolean },
       currentView: { type: String },
+      alreadySearched: { type: Boolean },
       latitude: { type: String },
       longitude: { type: String },
       radius: { type: Number },
@@ -52,6 +53,7 @@ export class AmenityFinder extends LitElement {
     super();
     this.showSidebar = false;
     this.currentView = 'home';
+    this.alreadySearched = false;
 
     this.latitude = '47.3902';
     this.longitude = '8.5158';
@@ -108,9 +110,13 @@ export class AmenityFinder extends LitElement {
     page('/', () => {
       this.currentView = 'home';
     });
-    page('/results/:lat/:lon/:radius', ctx => {
-      this._setSearchParametersFromRouteContext(ctx);
-      this.currentView = 'results';
+    page('/results', () => {
+      if (this.alreadySearched) {
+        page.redirect(`/results/${this.latitude}/${this.longitude}/${this.radius}`);
+        return;
+      }
+
+      page.redirect('/search');
     });
     page('/search', () => {
       this.currentView = 'search';
@@ -144,6 +150,7 @@ export class AmenityFinder extends LitElement {
     this.radius = radius;
     this.latitude = lat;
     this.longitude = lon;
+    this.alreadySearched = true;
   }
 }
 
