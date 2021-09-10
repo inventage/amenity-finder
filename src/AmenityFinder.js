@@ -78,7 +78,7 @@ export class AmenityFinder extends LitElement {
                 this.showSidebar = !this.showSidebar;
               }}"
             ></mwc-icon-button>
-            <div slot="title">Title</div>
+            <div slot="title">Amenity Finder</div>
           </mwc-top-app-bar>
           <main>${this._renderCurrentView()}</main>
         </div>
