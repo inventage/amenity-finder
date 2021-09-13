@@ -21,7 +21,6 @@ jobs:
 
       - name: Install and lint
         run: |
-          sudo npx playwright install-deps
           npm ci
           npm run lint
 
@@ -68,7 +67,6 @@ jobs:
 
       - name: Install and build
         run: |
-          sudo npx playwright install-deps
           npm ci
           npm run build
 
