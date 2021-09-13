@@ -1,6 +1,6 @@
 // import { playwrightLauncher } from '@web/test-runner-playwright';
 
-const filteredLogs = ['Running in dev mode', 'lit-html is in dev mode'];
+const filteredLogs = ['Running in dev mode', 'Lit is in dev mode', 'Multiple versions of Lit loaded'];
 
 export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
   /** Test files to run */
