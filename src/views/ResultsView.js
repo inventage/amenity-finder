@@ -41,9 +41,13 @@ export class ResultsView extends Requester(LitElement) {
     this.results = [];
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     this.api = this.requestInstance('api');
+  }
+
+  async firstUpdated() {
+    super.firstUpdated();
     await this._fetchResults();
   }
 
@@ -52,7 +56,7 @@ export class ResultsView extends Requester(LitElement) {
       <div>
         <h1>Results</h1>
         <p>
-          Displaying results</strong> for
+          Displaying ${this.results.length} results</strong> for
           <code>latitude</code> = <code>${this.latitude}</code>,
           <code>longitude</code> = <code>${this.longitude}</code> and
           <code>radius</code> = <code>${this.radius}</code>
