@@ -2,6 +2,8 @@ import { css, html, LitElement } from 'lit';
 
 import '@material/mwc-button';
 
+const logo = new URL('../../assets/img/amenity-finder-logo.png', import.meta.url);
+
 export class HomeView extends LitElement {
   static get styles() {
     return css`
@@ -27,7 +29,7 @@ export class HomeView extends LitElement {
    */
   render() {
     return html`<div class="banner">
-      <img src="/assets/img/amenity-finder-logo.png" alt="Amenity Finder Logo" />
+      <img src="${logo}" alt="Amenity Finder Logo" />
       <mwc-button label="Start a search" outlined @click="${() => (window.location = '/search')}"></mwc-button>
     </div>`;
   }
