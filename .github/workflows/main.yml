@@ -46,7 +46,7 @@ jobs:
       - name: Install and test
         run: |
           npm ci
-          sudo npx playwright install-deps
+          npx playwright install-deps
           npm test
 
   # Build and deploy
