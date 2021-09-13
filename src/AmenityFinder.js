@@ -8,8 +8,10 @@ import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
 
 import { lazyLoad } from './directives/lazyLoadDirective.js';
+import { Provider } from './mixins/ProviderMixin.js';
+import { OverpassApi } from './services/OverpassApi.js';
 
-export class AmenityFinder extends LitElement {
+export class AmenityFinder extends Provider(LitElement) {
   static get properties() {
     return {
       showSidebar: { type: Boolean },
@@ -58,6 +60,9 @@ export class AmenityFinder extends LitElement {
     this.radius = 1000;
 
     this._initializeRoutes();
+
+    // Provide instances
+    this.provideInstance('api', new OverpassApi());
   }
 
   render() {
