@@ -12,7 +12,8 @@
     "start": "web-dev-server",
     "deploy": "npm run build && surge --domain itchy-frog.surge.sh dist",
     "test": "web-test-runner --coverage",
-    "test:watch": "web-test-runner --watch"
+    "test:watch": "web-test-runner --watch",
+    "prepare": "is-ci || husky install"
   },
   "dependencies": {
     "@inventage/leaflet-map": "^0.7.0",
@@ -43,7 +44,8 @@
     "deepmerge": "^4.2.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "husky": "^4.3.8",
+    "husky": "^7.0.0",
+    "is-ci": "^3.0.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.0",
     "rimraf": "^3.0.2",
@@ -81,11 +83,6 @@
         }
       }
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.js": [
