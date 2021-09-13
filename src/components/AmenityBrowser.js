@@ -10,8 +10,6 @@ export class AmenityBrowser extends LitElement {
       longitude: { type: String },
       radius: { type: Number },
       amenities: { type: Array },
-
-      // Internal properties
       markers: { type: Array, attribute: false },
       selectedMarker: { type: Object, attribute: false },
     };

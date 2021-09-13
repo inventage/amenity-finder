@@ -1,5 +1,5 @@
 import { expect } from '@open-wc/testing';
-import { formatDistance } from '../../src/utils/helpers.js';
+import { compareByProperty, formatDistance } from '../../src/utils/helpers.js';
 
 describe('helpers', () => {
   describe('formatDistance', () => {
@@ -26,6 +26,21 @@ describe('helpers', () => {
       expect(formatDistance(undefined)).to.equal(undefined);
       expect(formatDistance(null)).to.equal(null);
       expect(formatDistance('abc')).to.equal('abc');
+    });
+  });
+
+  describe('compareByProperty', () => {
+    it('returns zero if property does not exist in either objects', () => {
+      expect(compareByProperty({}, {}, 'someProperty')).to.equal(0);
+    });
+
+    it('can compare by an existing property', () => {
+      const a = { foo: 1, bar: 'c', baz: 'b' };
+      const b = { foo: 2, bar: 'a', baz: 'b' };
+
+      expect(compareByProperty(a, b, 'foo')).to.equal(-1);
+      expect(compareByProperty(a, b, 'bar')).to.equal(1);
+      expect(compareByProperty(a, b, 'baz')).to.equal(0);
     });
   });
 });

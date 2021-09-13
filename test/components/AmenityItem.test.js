@@ -11,6 +11,12 @@ const result = {
 
 describe('<amenity-item>', () => {
   describe('Structure', () => {
+    // Fails on Firefox + Webkit
+    // it('is empty by default', async () => {
+    //   const el = await fixture(html`<amenity-item></amenity-item>`);
+    //   expect(el.shadowRoot.innerHTML).to.equal('<!----><!---->');
+    // });
+
     it('has a .amenity-item element', async () => {
       const el = await fixture(html`<amenity-item .name="${result.name}" .distance="${result.distance}"></amenity-item>`);
       expect(el.shadowRoot.querySelector('.amenity-item')).to.exist;

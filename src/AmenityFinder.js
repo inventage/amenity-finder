@@ -13,7 +13,7 @@ import { Provider } from './mixins/ProviderMixin.js';
 import { OverpassApi } from './services/OverpassApi.js';
 import { PendingContainer } from './mixins/PendingContainerMixin.js';
 
-export class AmenityFinder extends PendingContainer(Provider(LitElement)) {
+export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
   static get properties() {
     return {
       showSidebar: { type: Boolean },
@@ -31,12 +31,21 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement)) {
         --amenity-container-padding: 1rem;
       }
 
+      a {
+        color: var(--mdc-theme-primary);
+      }
+
       main {
-        padding: var(--amenity-container-padding, 1rem);
         box-sizing: border-box;
+        padding: var(--amenity-container-padding, 1rem);
         display: flex;
         flex: 1;
         max-height: calc(100vh - 64px);
+      }
+
+      .sidebar {
+        position: relative;
+        z-index: 1337;
       }
 
       [slot='appContent'] {
@@ -71,14 +80,16 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement)) {
 
     this._initializeRoutes();
 
-    // Provide instances
+    this.addEventListener('MDCDrawer:closed', () => this._closeSidebar());
+
+    // Provide services
     this.provideInstance('api', new OverpassApi());
   }
 
   render() {
     return html`
       <mwc-linear-progress indeterminate .closed="${!this.__hasPendingChildren}"></mwc-linear-progress>
-      <mwc-drawer hasHeader type="modal" .open="${this.showSidebar}" @MDCDrawer:closed="${this._closeSidebar}">
+      <mwc-drawer hasHeader type="modal" .open="${this.showSidebar}">
         <span slot="title">Navigation</span>
         <mwc-list>
           <mwc-list-item @click="${() => this._navigateToUrl('/')}">Home</mwc-list-item>
@@ -87,13 +98,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement)) {
         </mwc-list>
         <div slot="appContent">
           <mwc-top-app-bar>
-            <mwc-icon-button
-              icon="menu"
-              slot="navigationIcon"
-              @click="${() => {
-                this.showSidebar = !this.showSidebar;
-              }}"
-            ></mwc-icon-button>
+            <mwc-icon-button icon="menu" slot="navigationIcon" @click="${this._toggleSidebar}"></mwc-icon-button>
             <div slot="title">Amenity Finder</div>
           </mwc-top-app-bar>
           <main>${this._renderCurrentView()}</main>
@@ -124,13 +129,43 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement)) {
           </results-view>`
         );
       default:
-        return ``;
+        return lazyLoad(import('./views/NotFoundView.js'), html`<not-found-view></not-found-view>`);
     }
+  }
+
+  _toggleSidebar() {
+    this.showSidebar = !this.showSidebar;
+  }
+
+  _closeSidebar() {
+    this.showSidebar = false;
+  }
+
+  _navigateToUrl(url) {
+    page(url);
+
+    this._closeSidebar();
   }
 
   _initializeRoutes() {
     page('/', () => {
       this.currentView = 'home';
+    });
+    page('/results', () => {
+      if (this.alreadySearched) {
+        page.redirect(`/results/${this.latitude}/${this.longitude}/${this.radius}`);
+        return;
+      }
+
+      page.redirect('/search');
+    });
+    page('/results', () => {
+      if (this.alreadySearched) {
+        page.redirect(`/results/${this.latitude}/${this.longitude}/${this.radius}`);
+        return;
+      }
+
+      page.redirect('/search');
     });
     page('/results', () => {
       if (this.alreadySearched) {
@@ -156,16 +191,10 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement)) {
       this._setSearchParametersFromRouteContext(ctx);
       this.currentView = 'search';
     });
+    page('*', () => {
+      this.currentView = undefined;
+    });
     page();
-  }
-
-  _navigateToUrl(url) {
-    page(url);
-    this._closeSidebar();
-  }
-
-  _closeSidebar() {
-    this.showSidebar = false;
   }
 
   // eslint-disable-next-line class-methods-use-this

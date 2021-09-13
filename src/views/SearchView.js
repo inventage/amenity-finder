@@ -1,9 +1,11 @@
-import { css, html, LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import '@material/mwc-button';
 import '@material/mwc-textfield';
 import '@inventage/leaflet-map';
 
-import { canGeolocate, detectUserLocation } from '../utils/geolocation.js';
+import { canGeolocate, detectUserLocation, latLongRegexPatternString } from '../utils/geolocation.js';
+import styles from './styles/searchViewStyles.js';
+import { MAX_SEARCH_RADIUS } from '../common/config.js';
 
 export class SearchView extends LitElement {
   static get properties() {
@@ -11,45 +13,66 @@ export class SearchView extends LitElement {
       latitude: { type: String },
       longitude: { type: String },
       radius: { type: Number },
+      formValid: { type: Boolean, attribute: false },
     };
   }
 
   static get styles() {
-    return css`
-      :host {
-        --amenity-search-form-spacing: 1rem;
+    return styles;
+  }
 
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-      }
+  constructor() {
+    super();
 
-      leaflet-map {
-        flex: 1;
-
-        /* stretch to edges */
-        margin-left: calc(var(--amenity-container-padding) * -1);
-        margin-right: calc(var(--amenity-container-padding) * -1);
-        margin-bottom: calc(var(--amenity-container-padding) * -1);
-      }
-
-      .search-form {
-        margin-bottom: 1rem;
-      }
-    `;
+    this.formValid = true;
   }
 
   render() {
-    return html`
-      <h1>Search</h1>
+    return html`<div class="upper search-header">
+        <h1>Search</h1>
 
-      <div class="search-form">
-        <mwc-textfield label="Latitude" .value="${this.latitude}" @keyup="${e => (this.latitude = e.target.value)}"></mwc-textfield>
-        <mwc-textfield label="Longitude" .value="${this.longitude}" @keyup="${e => (this.longitude = e.target.value)}"></mwc-textfield>
-        <mwc-textfield label="Radius (m)" .value="${this.radius}" @keyup="${e => (this.radius = e.target.value)}"></mwc-textfield>
-
-        <mwc-button outlined label="Locate Me" icon="my_location" @click="${this._handleLocateMeClick}" .disabled="${!canGeolocate()}"></mwc-button>
-        <mwc-button raised label="Search" @click="${this._triggerSearch}" .disabled="${!this._canSearch()}"></mwc-button>
+        <div class="form search-form">
+          <div class="search-fields">
+            <mwc-textfield
+              class="field"
+              label="Latitude"
+              suffix="°"
+              pattern="${latLongRegexPatternString}"
+              autoValidate
+              validateOnInitialRender
+              .value="${this.latitude}"
+              @invalid="${e => (this.formValid = e.target.validity.valid)}"
+              @keyup="${e => this._handleFieldInput(e, 'latitude')}"
+            ></mwc-textfield>
+            <mwc-textfield
+              class="field"
+              label="Longitude"
+              suffix="°"
+              pattern="${latLongRegexPatternString}"
+              autoValidate
+              validateOnInitialRender
+              .value="${this.longitude}"
+              @invalid="${e => (this.formValid = e.target.validity.valid)}"
+              @keyup="${e => this._handleFieldInput(e, 'longitude')}"
+            ></mwc-textfield>
+            <mwc-textfield
+              class="field"
+              label="Radius"
+              type="number"
+              suffix="m"
+              max="${MAX_SEARCH_RADIUS}"
+              autoValidate
+              validateOnInitialRender
+              .value="${this.radius}"
+              @invalid="${e => (this.formValid = e.target.validity.valid)}"
+              @change="${e => this._handleFieldInput(e, 'radius')}"
+            ></mwc-textfield>
+          </div>
+          <div class="search-buttons">
+            <mwc-button outlined label="Locate Me" icon="my_location" @click="${this._handleLocateMeClick}" .disabled="${!canGeolocate()}"></mwc-button>
+            <mwc-button raised label="Search" @click="${this._triggerSearch}" .disabled="${!this._canSearch()}"></mwc-button>
+          </div>
+        </div>
       </div>
 
       <leaflet-map
@@ -58,34 +81,75 @@ export class SearchView extends LitElement {
         .radius="${this.radius}"
         @center-updated="${this._updateLatitudeLongitudeFromMap}"
         @tiles-loading="${e => {
+          const { promise } = e.detail;
+          if (!promise) {
+            return;
+          }
+
           this.dispatchEvent(
             new CustomEvent('pending-state', {
               composed: true,
               bubbles: true,
-              detail: {
-                promise: e.detail.promise,
-              },
+              detail: { promise },
             })
           );
         }}"
         updatecenteronclick
-      ></leaflet-map>
-    `;
+      ></leaflet-map> `;
   }
 
-  async _handleLocateMeClick(e) {
+  _handleFieldInput(e, property) {
+    // Update form valid state and bail if not valid
+    this.formValid = e.target.validity.valid;
+    if (!this.formValid) {
+      return;
+    }
+
+    // Update property
+    this[property] = e.target.value;
+
+    // Handle enter key pressed
+    const { code } = e;
+    if (code === 'Enter') {
+      this._triggerSearch();
+    }
+  }
+
+  _handleLocateMeClick(e) {
+    // Blur after click (nicer UI)
     e.target.blur();
 
-    try {
-      const {
-        coords: { latitude, longitude },
-      } = await detectUserLocation();
+    // Async user location detection
+    detectUserLocation()
+      .then(position => {
+        const {
+          coords: { latitude, longitude },
+        } = position;
 
-      this.latitude = latitude;
-      this.longitude = longitude;
-    } catch (err) {
-      console.error(err);
+        this.latitude = latitude;
+        this.longitude = longitude;
+      })
+      .catch(error => console.error(error));
+  }
+
+  _triggerSearch() {
+    if (!this._canSearch()) {
+      return;
     }
+
+    this.dispatchEvent(
+      new CustomEvent('execute-search', {
+        detail: {
+          latitude: this.latitude,
+          longitude: this.longitude,
+          radius: this.radius,
+        },
+      })
+    );
+  }
+
+  _canSearch() {
+    return this.latitude && this.longitude && this.radius && this.formValid;
   }
 
   _updateLatitudeLongitudeFromMap(e) {
@@ -99,22 +163,6 @@ export class SearchView extends LitElement {
 
     this.latitude = latitude;
     this.longitude = longitude;
-  }
-
-  _triggerSearch() {
-    this.dispatchEvent(
-      new CustomEvent('execute-search', {
-        detail: {
-          latitude: this.latitude,
-          longitude: this.longitude,
-          radius: this.radius,
-        },
-      })
-    );
-  }
-
-  _canSearch() {
-    return this.latitude && this.longitude && this.radius;
   }
 }
 
