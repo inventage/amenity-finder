@@ -57,6 +57,17 @@ export class SearchView extends LitElement {
         .longitude="${this.longitude}"
         .radius="${this.radius}"
         @center-updated="${this._updateLatitudeLongitudeFromMap}"
+        @tiles-loading="${e => {
+          this.dispatchEvent(
+            new CustomEvent('pending-state', {
+              composed: true,
+              bubbles: true,
+              detail: {
+                promise: e.detail.promise,
+              },
+            })
+          );
+        }}"
         updatecenteronclick
       ></leaflet-map>
     `;

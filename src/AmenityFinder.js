@@ -3,6 +3,7 @@ import page from 'page';
 
 import '@material/mwc-drawer';
 import '@material/mwc-top-app-bar';
+import '@material/mwc-linear-progress';
 import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
@@ -10,8 +11,9 @@ import '@material/mwc-icon-button';
 import { lazyLoad } from './directives/lazyLoadDirective.js';
 import { Provider } from './mixins/ProviderMixin.js';
 import { OverpassApi } from './services/OverpassApi.js';
+import { PendingContainer } from './mixins/PendingContainerMixin.js';
 
-export class AmenityFinder extends Provider(LitElement) {
+export class AmenityFinder extends PendingContainer(Provider(LitElement)) {
   static get properties() {
     return {
       showSidebar: { type: Boolean },
@@ -46,6 +48,14 @@ export class AmenityFinder extends Provider(LitElement) {
         z-index: 1;
         position: relative;
       }
+
+      mwc-linear-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
     `;
   }
 
@@ -67,6 +77,7 @@ export class AmenityFinder extends Provider(LitElement) {
 
   render() {
     return html`
+      <mwc-linear-progress indeterminate .closed="${!this.__hasPendingChildren}"></mwc-linear-progress>
       <mwc-drawer hasHeader type="modal" .open="${this.showSidebar}" @MDCDrawer:closed="${this._closeSidebar}">
         <span slot="title">Navigation</span>
         <mwc-list>
