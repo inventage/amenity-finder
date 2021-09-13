@@ -7,9 +7,7 @@ import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
 
-import './views/HomeView.js';
-import './views/ResultsView.js';
-import './views/SearchView.js';
+import { lazyLoad } from './directives/lazyLoadDirective.js';
 
 export class AmenityFinder extends LitElement {
   static get properties() {
@@ -91,18 +89,24 @@ export class AmenityFinder extends LitElement {
   _renderCurrentView() {
     switch (this.currentView) {
       case 'home':
-        return html`<home-view></home-view>`;
+        return lazyLoad(import('./views/HomeView.js'), html`<home-view></home-view>`);
       case 'search':
-        return html`<search-view
-          .latitude="${this.latitude}"
-          .longitude="${this.longitude}"
-          .radius="${this.radius}"
-          @execute-search="${e => this._onExecuteSearch(e)}"
-        ></search-view>`;
+        return lazyLoad(
+          import('./views/SearchView.js'),
+          html`<search-view
+            .latitude="${this.latitude}"
+            .longitude="${this.longitude}"
+            .radius="${this.radius}"
+            @execute-search="${e => this._onExecuteSearch(e)}"
+          ></search-view>`
+        );
       case 'results':
-        return html`<results-view .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}">
-          <p><a href="${`/search/${this.latitude}/${this.longitude}/${this.radius}`}">← Back to search</a></p>
-        </results-view>`;
+        return lazyLoad(
+          import('./views/ResultsView.js'),
+          html`<results-view .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}">
+            <p><a href="${`/search/${this.latitude}/${this.longitude}/${this.radius}`}">← Back to search</a></p>
+          </results-view>`
+        );
       default:
         return ``;
     }
