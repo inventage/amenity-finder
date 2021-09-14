@@ -22,6 +22,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
       latitude: { type: String },
       longitude: { type: String },
       radius: { type: Number },
+      rendered: { type: Boolean, reflect: true },
     };
   }
 
@@ -72,6 +73,11 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         z-index: 100;
       }
     `;
+  }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+    this.rendered = true;
   }
 
   constructor() {

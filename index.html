@@ -56,6 +56,10 @@
       animation-delay: -0.5s;
     }
 
+    amenity-finder[rendered] ~ .loading-indicator {
+      display: none;
+    }
+
     @keyframes loading-indicator {
       0% {
         top: 36px;
@@ -77,8 +81,8 @@
 </head>
 
 <body>
-  <div class="loading-indicator"></div>
   <amenity-finder></amenity-finder>
+  <div class="loading-indicator"></div>
   <script type="module" src="./src/AmenityFinder.js"></script>
 </body>
 
