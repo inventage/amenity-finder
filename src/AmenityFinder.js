@@ -52,10 +52,16 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         display: flex;
         flex-direction: column;
         height: 100%;
+        background-color: var(--amenity-finder-page-background-color);
 
         /* fixes issues where content would overlay sidebar */
         z-index: 1;
         position: relative;
+      }
+
+      [slot='title'] a {
+        color: inherit;
+        text-decoration: none;
       }
 
       mwc-linear-progress {
@@ -97,7 +103,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         <div slot="appContent">
           <mwc-top-app-bar>
             <mwc-icon-button icon="menu" slot="navigationIcon" @click="${this._toggleSidebar}"></mwc-icon-button>
-            <div slot="title">Amenity Finder</div>
+            <div slot="title"><a href="/">Amenity Finder</a></div>
           </mwc-top-app-bar>
           <main>${this._renderCurrentView()}</main>
         </div>

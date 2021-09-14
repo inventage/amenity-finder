@@ -12,12 +12,15 @@
   <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet">
 
   <style>
+    :root {
+      --amenity-finder-page-background-color: #ededed;
+    }
     html,
     body {
       margin: 0;
       padding: 0;
       font-family: sans-serif;
-      background-color: #ededed;
+      background-color: var(--amenity-finder-page-background-color);
       height: 100%;
 
       /*
@@ -28,13 +31,54 @@
        */
       --mdc-theme-primary: #004996;
     }
+
+    .loading-indicator {
+      display: block;
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+    }
+
+    .loading-indicator::before,
+    .loading-indicator::after {
+      content: '';
+      position: absolute;
+      border: 4px solid #004996;
+      opacity: 1;
+      border-radius: 50%;
+      animation: loading-indicator 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+
+    .loading-indicator::after {
+      animation-delay: -0.5s;
+    }
+
+    @keyframes loading-indicator {
+      0% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+      }
+      100% {
+        top: 0;
+        left: 0;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+      }
+    }
   </style>
   <title>amenity-finder</title>
 </head>
 
 <body>
+  <div class="loading-indicator"></div>
   <amenity-finder></amenity-finder>
-
   <script type="module" src="./src/AmenityFinder.js"></script>
 </body>
 
