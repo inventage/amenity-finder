@@ -1,4 +1,4 @@
-import { fixture, expect } from '@open-wc/testing';
+import { fixture, expect, waitUntil } from '@open-wc/testing';
 import { html } from 'lit/static-html.js';
 
 import '../../src/AmenityFinder.js';
@@ -7,6 +7,7 @@ describe('<amenity-finder>', () => {
   describe('Structure', () => {
     it('has a rendered attribute', async () => {
       const el = await fixture(html`<amenity-finder></amenity-finder>`);
+      await waitUntil(() => el.shadowRoot.querySelector('mwc-drawer'), '<amenity-finder> did not render children');
       expect(el).to.have.attribute('rendered');
     });
   });
