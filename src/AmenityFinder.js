@@ -80,8 +80,6 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
 
     this._initializeRoutes();
 
-    this.addEventListener('MDCDrawer:closed', () => this._closeSidebar());
-
     // Provide services
     this.provideInstance('api', new OverpassApi());
   }
@@ -89,7 +87,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
   render() {
     return html`
       <mwc-linear-progress indeterminate .closed="${!this.__hasPendingChildren}"></mwc-linear-progress>
-      <mwc-drawer hasHeader type="modal" .open="${this.showSidebar}">
+      <mwc-drawer hasHeader type="modal" .open="${this.showSidebar}" @MDCDrawer:closed="${this._closeSidebar}">
         <span slot="title">Navigation</span>
         <mwc-list>
           <mwc-list-item @click="${() => this._navigateToUrl('/')}">Home</mwc-list-item>
@@ -133,7 +131,8 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
     }
   }
 
-  _toggleSidebar() {
+  _toggleSidebar(e) {
+    e.target.blur();
     this.showSidebar = !this.showSidebar;
   }
 
