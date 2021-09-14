@@ -11,9 +11,9 @@ import path from 'path';
 export default {
   input: 'index.html',
   output: {
-    entryFileNames: '[hash].js',
-    chunkFileNames: '[hash].js',
-    assetFileNames: '[hash][extname]',
+    entryFileNames: '[name]-[hash].js',
+    chunkFileNames: '[name]-[hash].js',
+    assetFileNames: '[name]-[hash][extname]',
     format: 'es',
     dir: 'dist',
   },
