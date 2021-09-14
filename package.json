@@ -13,6 +13,7 @@
     "start": "web-dev-server",
     "deploy": "npm run build && surge --domain itchy-frog.surge.sh dist",
     "test": "web-test-runner --coverage",
+    "test:all": "npm run test -- --playwright --browsers chromium firefox webkit",
     "test:watch": "web-test-runner --watch",
     "prepare": "is-ci || husky install"
   },

@@ -47,7 +47,7 @@ jobs:
         run: |
           npm ci
           npx playwright install-deps
-          npm test
+          npm run test:all
 
   # Build and deploy
   build_deploy:
