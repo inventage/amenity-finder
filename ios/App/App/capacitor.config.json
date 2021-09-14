@@ -1,0 +1,7 @@
+{
+	"appId": "com.inventage.amenity_finder",
+	"appName": "Amenity Finder",
+	"webDir": "dist",
+	"npmClient": "npm",
+	"bundledWebRuntime": false
+}
