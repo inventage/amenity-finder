@@ -5,7 +5,7 @@ const hmr = process.argv.includes('--hmr');
 
 export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
   watch: !hmr,
-  debug: true,
+  // debug: true,
   /** Resolve bare module imports */
   nodeResolve: {
     exportConditions: ['browser', 'development'],
@@ -15,12 +15,20 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
   // esbuildTarget: 'auto'
 
   /** Set appIndex to enable SPA routing */
-  appIndex: 'public/index.html',
+  appIndex: 'index.html',
 
   plugins: [
     /** Use Hot Module Replacement by uncommenting. Requires @open-wc/dev-server-hmr plugin */
     // hmr && hmrPlugin({ exclude: ['**/*/node_modules/**/*'], presets: [presets.litElement] }),
   ],
 
-  // See documentation for all available options
+  middleware: [
+    function rewriteIndex(context, next) {
+      if (context.url === '/' || context.url === '/index.html') {
+        context.url = '/public/index.html';
+      }
+
+      return next();
+    },
+  ],
 });
