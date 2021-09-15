@@ -41,7 +41,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         padding: var(--amenity-container-padding, 1rem);
         display: flex;
         flex: 1;
-        max-height: calc(100vh - 64px);
+        max-height: calc(100vh - 64px - var(--safe-area-inset-top, 0));
       }
 
       .sidebar {
@@ -60,7 +60,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         position: relative;
       }
 
-      mwc-top-app-bar [slot='title'] a {
+      mwc-top-app-bar > [slot='title'] a {
         color: inherit;
         text-decoration: none;
       }
@@ -76,9 +76,11 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
       @supports (padding-top: env(safe-area-inset-top)) {
         [slot='appContent'] {
           padding-top: var(--safe-area-inset-top, 0);
+          position: fixed;
+          overflow: hidden;
         }
 
-        mwc-drawer [slot='title'] {
+        mwc-drawer > [slot='title'] {
           position: relative;
           top: var(--safe-area-inset-top, 0);
         }
