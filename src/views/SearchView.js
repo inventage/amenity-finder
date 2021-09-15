@@ -3,7 +3,7 @@ import '@material/mwc-button';
 import '@material/mwc-textfield';
 import '@inventage/leaflet-map';
 
-import { canGeolocate, detectUserLocation, latLongRegexPatternString } from '../utils/geolocation.js';
+import { detectUserLocation, latLongRegexPatternString } from '../utils/geolocation.js';
 import styles from './styles/searchViewStyles.js';
 import { MAX_SEARCH_RADIUS } from '../common/config.js';
 
@@ -71,13 +71,7 @@ export class SearchView extends LitElement {
             ></mwc-textfield>
           </div>
           <div class="search-buttons">
-            <mwc-button
-              outlined
-              label="Locate Me"
-              icon="my_location"
-              @click="${this._handleLocateMeClick}"
-              .disabled="${!canGeolocate() || this.isLocating}"
-            ></mwc-button>
+            <mwc-button outlined label="Locate Me" icon="my_location" @click="${this._handleLocateMeClick}" .disabled="${this.isLocating}"></mwc-button>
             <mwc-button raised label="Search" @click="${this._triggerSearch}" .disabled="${!this._canSearch()}"></mwc-button>
           </div>
         </div>

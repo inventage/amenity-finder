@@ -12,13 +12,6 @@ import { Geolocation } from '@capacitor/geolocation';
 const latLongRegexPatternString = '^-?\\d+(\\.\\d+)?$';
 
 /**
- * Returns true if the current agent supports geolocation.
- *
- * @returns {boolean}
- */
-const canGeolocate = () => 'geolocation' in navigator;
-
-/**
  * Function to detect a user's location, promise based.
  *
  * @returns {Promise<import('@capacitor/geolocation').Position>}
@@ -53,4 +46,4 @@ const distanceBetween = ([lat1, lon1], [lat2, lng2]) => {
   return p1.distanceTo(p2);
 };
 
-export { canGeolocate, detectUserLocation, distanceBetween, latLongRegexPatternString };
+export { detectUserLocation, distanceBetween, latLongRegexPatternString };
