@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.mjs,.html . --ignore-path .gitignore --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --check",
     "format": "eslint --ext .js,.mjs,.html . --fix --ignore-path .gitignore  --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --write",
-    "build": "rimraf dist && rollup -c rollup.config.js",
+    "build": "rimraf dist && rollup -c rollup.config.js --sourcemap --sourcemapExcludeSources",
     "postbuild": "cp dist/index.html dist/200.html",
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
     "start": "web-dev-server",

@@ -21,6 +21,12 @@
          * @see https://material.io/develop/web/docs/theming
          */
         --mdc-theme-primary: #004996;
+
+        /**
+         * @see https://medium.com/@draganeror/iphone-x-layout-features-with-css-environment-variables-d57423433dec
+         */
+        --safe-area-inset-top: env(safe-area-inset-top);
+        --safe-area-inset-bottom: env(safe-area-inset-bottom);
       }
 
       html,
@@ -30,6 +36,14 @@
         font-family: sans-serif;
         background-color: var(--amenity-finder-page-background-color);
         height: 100%;
+      }
+
+      @supports (padding-top: env(safe-area-inset-top)) {
+        html {
+          height: calc(100% - var(--safe-area-inset-top, 0) - var(--safe-area-inset-bottom, 0));
+          margin-top: var(--safe-area-inset-top, 0);
+          margin-bottom: var(--safe-area-inset-bottom, 0);
+        }
       }
 
       .loading-indicator {

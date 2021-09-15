@@ -9,7 +9,7 @@ import { generateSW } from 'rollup-plugin-workbox';
 import path from 'path';
 
 export default {
-  input: 'public/index.html',
+  input: 'index.html',
   output: {
     entryFileNames: '[name]-[hash].js',
     chunkFileNames: '[name]-[hash].js',

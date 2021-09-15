@@ -70,7 +70,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
 
       mwc-linear-progress {
         position: fixed;
-        top: 0;
+        top: var(--safe-area-inset-top, 0);
         left: 0;
         right: 0;
         z-index: 100;
