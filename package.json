@@ -19,6 +19,8 @@
     "prepare": "is-ci || husky install"
   },
   "dependencies": {
+    "@capacitor/core": "^3.2.2",
+    "@capacitor/device": "^1.0.3",
     "@capacitor/ios": "^3.2.2",
     "@inventage/leaflet-map": "^0.7.0",
     "@material/mwc-button": "^0.23.0",

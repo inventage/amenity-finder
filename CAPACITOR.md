@@ -2,6 +2,12 @@
 
 This file contains Capacitor specific instructions and hints.
 
+## v3 Specific Instructions
+
+Some examples in the documentation still use v2 syntax (e.g. Importing Plugins from `@capacitor/core` instead of specific NPM packages for each plugin).
+
+The [v3 migration guide](https://capacitorjs.com/docs/updating/3-0) has some good tips on what should be used in v3.
+
 ## Splash Screens and Icons
 
 [This guide](https://capacitorjs.com/docs/guides/splash-screens-and-icons) outlines how to create splash screens and icons. 

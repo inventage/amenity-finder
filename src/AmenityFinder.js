@@ -8,6 +8,9 @@ import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
 
+import { Device } from '@capacitor/device';
+import { Capacitor } from '@capacitor/core';
+
 import { lazyLoad } from './directives/lazyLoadDirective.js';
 import { Provider } from './mixins/ProviderMixin.js';
 import { OverpassApi } from './services/OverpassApi.js';
@@ -80,6 +83,13 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
     this.rendered = true;
   }
 
+  async connectedCallback() {
+    super.connectedCallback();
+
+    const info = await Device.getInfo();
+    console.info(info);
+  }
+
   constructor() {
     super();
     this.showSidebar = false;
@@ -109,7 +119,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         <div slot="appContent">
           <mwc-top-app-bar>
             <mwc-icon-button icon="menu" slot="navigationIcon" @click="${this._toggleSidebar}"></mwc-icon-button>
-            <div slot="title"><a href="/">Amenity Finder</a></div>
+            <div slot="title"><a href="/">Amenity Finder</a> (${Capacitor.getPlatform()})</div>
           </mwc-top-app-bar>
           <main>${this._renderCurrentView()}</main>
         </div>
