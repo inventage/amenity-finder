@@ -21,14 +21,4 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
     /** Use Hot Module Replacement by uncommenting. Requires @open-wc/dev-server-hmr plugin */
     // hmr && hmrPlugin({ exclude: ['**/*/node_modules/**/*'], presets: [presets.litElement] }),
   ],
-
-  middleware: [
-    function rewriteIndex(context, next) {
-      if (context.url === '/' || context.url === '/index.html') {
-        context.url = '/public/index.html';
-      }
-
-      return next();
-    },
-  ],
 });
