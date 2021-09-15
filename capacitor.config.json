@@ -3,5 +3,8 @@
   "appName": "Amenity Finder",
   "webDir": "dist",
   "npmClient": "npm",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "ios": {
+    "scheme": "Amenity Finder"
+  }
 }
