@@ -41,6 +41,7 @@ export class SearchView extends LitElement {
               suffix="°"
               pattern="${latLongRegexPatternString}"
               autoValidate
+              inputmode="decimal"
               validateOnInitialRender
               .value="${this.latitude}"
               @invalid="${e => (this.formValid = e.target.validity.valid)}"
@@ -52,6 +53,7 @@ export class SearchView extends LitElement {
               suffix="°"
               pattern="${latLongRegexPatternString}"
               autoValidate
+              inputmode="decimal"
               validateOnInitialRender
               .value="${this.longitude}"
               @invalid="${e => (this.formValid = e.target.validity.valid)}"
@@ -64,6 +66,7 @@ export class SearchView extends LitElement {
               suffix="m"
               max="${MAX_SEARCH_RADIUS}"
               autoValidate
+              inputmode="numeric"
               validateOnInitialRender
               .value="${this.radius}"
               @invalid="${e => (this.formValid = e.target.validity.valid)}"
