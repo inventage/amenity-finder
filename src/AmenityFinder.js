@@ -41,7 +41,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         padding: var(--amenity-container-padding, 1rem);
         display: flex;
         flex: 1;
-        max-height: calc(100vh - 64px - var(--safe-area-inset-top, 0));
+        max-height: calc(100vh - 56px - var(--safe-area-inset-top, 0));
       }
 
       .sidebar {
@@ -67,7 +67,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
 
       mwc-linear-progress {
         position: fixed;
-        top: var(--safe-area-inset-top, 0);
+        top: calc(56px + var(--safe-area-inset-top, 0));
         left: 0;
         right: 0;
         z-index: 100;
@@ -78,6 +78,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
           padding-top: var(--safe-area-inset-top, 0);
           position: fixed;
           overflow: hidden;
+          width: 100%;
         }
 
         mwc-drawer > [slot='title'] {
