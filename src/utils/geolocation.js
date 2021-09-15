@@ -1,4 +1,5 @@
 import LatLon from 'geodesy/latlon-ellipsoidal-vincenty';
+import { Geolocation } from '@capacitor/geolocation';
 
 /**
  * Simple regex pattern (as string, so we can use it in the Constraint Validation API) for latitude / longitude.
@@ -20,22 +21,19 @@ const canGeolocate = () => 'geolocation' in navigator;
 /**
  * Function to detect a user's location, promise based.
  *
- * @link https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
- *
- * @returns {Promise<unknown>}
+ * @returns {Promise<import('@capacitor/geolocation').Position>}
  */
-const detectUserLocation = () =>
-  new Promise((resolve, reject) => {
-    if (!canGeolocate()) {
-      reject(new Error('Geolocation not possible'));
-      return;
+const detectUserLocation = async () => {
+  const hasPermissions = await Geolocation.checkPermissions();
+  if (!hasPermissions) {
+    const { location } = await Geolocation.requestPermissions();
+    if (location === 'denied') {
+      throw new Error('Geolocation not possible');
     }
+  }
 
-    navigator.geolocation.getCurrentPosition(
-      position => resolve(position),
-      error => reject(error)
-    );
-  });
+  return Geolocation.getCurrentPosition();
+};
 
 /**
  * Returns the distance in meters between two [lat, lng] points.

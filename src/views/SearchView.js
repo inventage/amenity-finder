@@ -14,6 +14,7 @@ export class SearchView extends LitElement {
       longitude: { type: String },
       radius: { type: Number },
       formValid: { type: Boolean, attribute: false },
+      isLocating: { type: Boolean, attribute: false },
     };
   }
 
@@ -25,6 +26,7 @@ export class SearchView extends LitElement {
     super();
 
     this.formValid = true;
+    this.isLocating = false;
   }
 
   render() {
@@ -69,7 +71,13 @@ export class SearchView extends LitElement {
             ></mwc-textfield>
           </div>
           <div class="search-buttons">
-            <mwc-button outlined label="Locate Me" icon="my_location" @click="${this._handleLocateMeClick}" .disabled="${!canGeolocate()}"></mwc-button>
+            <mwc-button
+              outlined
+              label="Locate Me"
+              icon="my_location"
+              @click="${this._handleLocateMeClick}"
+              .disabled="${!canGeolocate() || this.isLocating}"
+            ></mwc-button>
             <mwc-button raised label="Search" @click="${this._triggerSearch}" .disabled="${!this._canSearch()}"></mwc-button>
           </div>
         </div>
@@ -119,6 +127,8 @@ export class SearchView extends LitElement {
     // Blur after click (nicer UI)
     e.target.blur();
 
+    this.isLocating = true;
+
     // Async user location detection
     detectUserLocation()
       .then(position => {
@@ -126,10 +136,13 @@ export class SearchView extends LitElement {
           coords: { latitude, longitude },
         } = position;
 
+        console.info('position', position);
+
         this.latitude = latitude;
         this.longitude = longitude;
       })
-      .catch(error => console.error(error));
+      .catch(error => console.error(error))
+      .finally(() => (this.isLocating = false));
   }
 
   _triggerSearch() {
