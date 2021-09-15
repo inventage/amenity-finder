@@ -30,6 +30,13 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
     return css`
       :host {
         --amenity-container-padding: 1rem;
+        --amenity-finder-top-bar-height: 56px;
+      }
+
+      @media (min-width: 600px) {
+        :host {
+          --amenity-finder-top-bar-height: 64px;
+        }
       }
 
       a {
@@ -41,7 +48,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         padding: var(--amenity-container-padding, 1rem);
         display: flex;
         flex: 1;
-        max-height: calc(100vh - 56px - var(--safe-area-inset-top, 0));
+        max-height: calc(100vh - var(--amenity-finder-top-bar-height) - var(--safe-area-inset-top, 0));
       }
 
       .sidebar {
@@ -67,7 +74,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
 
       mwc-linear-progress {
         position: fixed;
-        top: calc(56px + var(--safe-area-inset-top, 0));
+        top: calc(var(--amenity-finder-top-bar-height) + var(--safe-area-inset-top, 0));
         left: 0;
         right: 0;
         z-index: 100;
