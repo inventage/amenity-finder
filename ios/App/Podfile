@@ -12,7 +12,7 @@ def capacitor_pods
 
 end
 
-target 'App' do
+target 'Amenity Finder' do
   capacitor_pods
   # Add your Pods here
 end

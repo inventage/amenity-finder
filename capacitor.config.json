@@ -1,5 +1,5 @@
 {
-  "appId": "com.inventage.amenity_finder",
+  "appId": "com.inventage.amenityfinder",
   "appName": "Amenity Finder",
   "webDir": "dist",
   "npmClient": "npm",
