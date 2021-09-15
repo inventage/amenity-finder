@@ -5,6 +5,7 @@
 	"npmClient": "npm",
 	"bundledWebRuntime": false,
 	"ios": {
-		"scheme": "Amenity Finder"
+		"scheme": "Amenity Finder",
+		"contentInset": "never"
 	}
 }

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
     <meta name="Description" content="Put your description here." />
     <base href="/" />
 
@@ -38,13 +38,16 @@
         height: 100%;
       }
 
-      @supports (padding-top: env(safe-area-inset-top)) {
-        html {
-          height: calc(100% - var(--safe-area-inset-top, 0) - var(--safe-area-inset-bottom, 0));
-          margin-top: var(--safe-area-inset-top, 0);
-          margin-bottom: var(--safe-area-inset-bottom, 0);
-        }
-      }
+      /*html::before {*/
+      /*  content: "";*/
+      /*  position: absolute;*/
+      /*  display: block;*/
+      /*  z-index: 2;*/
+      /*  top: 0;*/
+      /*  width: 100%;*/
+      /*  height: var(--safe-area-inset-top, 0);*/
+      /*  background-color: #004996;*/
+      /*}*/
 
       .loading-indicator {
         display: block;
@@ -97,6 +100,6 @@
   <body>
     <amenity-finder></amenity-finder>
     <div class="loading-indicator"></div>
-    <script type="module" src="./src/AmenityFinder.js"></script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>

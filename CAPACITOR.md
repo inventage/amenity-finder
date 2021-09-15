@@ -8,6 +8,10 @@ Some examples in the documentation still use v2 syntax (e.g. Importing Plugins f
 
 The [v3 migration guide](https://capacitorjs.com/docs/updating/3-0) has some good tips on what should be used in v3.
 
+## Loading URLs inside Web View
+
+See `allowNavigation` property in the [configuration file](https://capacitorjs.com/docs/config#configuration-file).
+
 ## iOS Design Considerations
 
 ### Notch / Viewport
@@ -33,3 +37,7 @@ Use [ImageMagick](https://stackoverflow.com/a/28937338/5882689):
 ```shell
 $ convert resources/icon.png -alpha off resources/icon.png
 ```
+
+## Important Links
+
+- https://capacitorjs.com/docs/config#configuration-file

@@ -8,9 +8,6 @@ import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
 
-import { Device } from '@capacitor/device';
-import { Capacitor } from '@capacitor/core';
-
 import { lazyLoad } from './directives/lazyLoadDirective.js';
 import { Provider } from './mixins/ProviderMixin.js';
 import { OverpassApi } from './services/OverpassApi.js';
@@ -63,7 +60,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         position: relative;
       }
 
-      [slot='title'] a {
+      mwc-top-app-bar [slot='title'] a {
         color: inherit;
         text-decoration: none;
       }
@@ -75,19 +72,27 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         right: 0;
         z-index: 100;
       }
+
+      @supports (padding-top: env(safe-area-inset-top)) {
+        [slot='appContent'] {
+          padding-top: var(--safe-area-inset-top, 0);
+        }
+
+        mwc-drawer [slot='title'] {
+          position: relative;
+          top: var(--safe-area-inset-top, 0);
+        }
+
+        mwc-list {
+          margin-top: var(--safe-area-inset-top, 0);
+        }
+      }
     `;
   }
 
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this.rendered = true;
-  }
-
-  async connectedCallback() {
-    super.connectedCallback();
-
-    const info = await Device.getInfo();
-    console.info(info);
   }
 
   constructor() {
@@ -119,7 +124,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         <div slot="appContent">
           <mwc-top-app-bar>
             <mwc-icon-button icon="menu" slot="navigationIcon" @click="${this._toggleSidebar}"></mwc-icon-button>
-            <div slot="title"><a href="/">Amenity Finder</a> (${Capacitor.getPlatform()})</div>
+            <div slot="title"><a href="/">Amenity Finder</a></div>
           </mwc-top-app-bar>
           <main>${this._renderCurrentView()}</main>
         </div>
