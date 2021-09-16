@@ -17,8 +17,7 @@
     "test": "web-test-runner --coverage",
     "test:all": "npm run test -- --playwright --browsers chromium firefox webkit",
     "test:watch": "web-test-runner --watch",
-    "prepare": "is-ci || husky install",
-    "postinstall": "cap doctor"
+    "prepare": "is-ci || husky install"
   },
   "dependencies": {
     "@capacitor/browser": "^1.0.3",
