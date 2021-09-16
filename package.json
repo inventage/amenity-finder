@@ -24,7 +24,6 @@
     "@capacitor/device": "^1.0.3",
     "@capacitor/geolocation": "^1.1.0",
     "@capacitor/ios": "^3.2.2",
-    "@capacitor/status-bar": "^1.0.3",
     "@inventage/leaflet-map": "^0.7.0",
     "@material/mwc-button": "^0.23.0",
     "@material/mwc-drawer": "^0.23.0",
