@@ -22,9 +22,9 @@
   "dependencies": {
     "@capacitor/browser": "^1.0.3",
     "@capacitor/core": "^3.2.2",
-    "@capacitor/device": "^1.0.3",
     "@capacitor/geolocation": "^1.1.0",
     "@capacitor/ios": "^3.2.2",
+    "@capacitor/splash-screen": "^1.1.2",
     "@inventage/leaflet-map": "^0.8.0",
     "@material/mwc-button": "^0.23.0",
     "@material/mwc-drawer": "^0.23.0",

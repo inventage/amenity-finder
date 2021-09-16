@@ -1,9 +1,23 @@
-import { Device } from '@capacitor/device';
+// noinspection ExceptionCaughtLocallyJS
+
+import { SplashScreen } from '@capacitor/splash-screen';
 
 (async () => {
-  // Device Info
-  console.info(await Device.getInfo());
+  try {
+    const appElement = document.querySelector('amenity-finder');
+    if (!appElement) {
+      throw new Error('Could not find app DOM element!');
+    }
 
-  // Load entry component
-  await import('./AmenityFinder.js');
+    // Hide when app has rendered initially
+    appElement.addEventListener('rendered', async () => {
+      await SplashScreen.hide();
+    });
+
+    // Load entry component
+    await import('./AmenityFinder.js');
+  } catch (e) {
+    console.error('An error occurred when initializing the application:', e);
+    await SplashScreen.hide();
+  }
 })();

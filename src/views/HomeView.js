@@ -1,4 +1,5 @@
 import { css, html, LitElement } from 'lit';
+import page from 'page';
 
 import '@material/mwc-button';
 
@@ -42,7 +43,7 @@ export class HomeView extends LitElement {
   render() {
     return html`<div class="banner">
       <img src="${logo}" alt="Amenity Finder Logo" class="logo" />
-      <mwc-button label="Start a search" outlined @click="${() => (window.location = '/search')}" class="button"></mwc-button>
+      <mwc-button label="Start a search" outlined @click="${() => page('/search')}" class="button"></mwc-button>
     </div>`;
   }
 }

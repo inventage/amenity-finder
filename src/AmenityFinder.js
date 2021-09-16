@@ -103,6 +103,11 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
   firstUpdated(changedProperties) {
     super.firstUpdated(changedProperties);
     this.rendered = true;
+    this.dispatchEvent(
+      new CustomEvent('rendered', {
+        detail: true,
+      })
+    );
   }
 
   constructor() {
