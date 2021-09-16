@@ -25,7 +25,17 @@ export class AmenityBrowser extends LitElement {
 
       .amenities:not(:empty) {
         width: 70ch;
-        max-width: 50vw;
+        max-width: 40vw;
+      }
+
+      amenity-item {
+        font-size: 85%;
+      }
+
+      @media (min-width: 1025px) {
+        .amenities:not(:empty) {
+          max-width: 50vw;
+        }
       }
 
       leaflet-map {

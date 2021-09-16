@@ -17,17 +17,22 @@ export class AmenityItem extends LitElement {
         padding: var(--amenity-container-padding);
         border-bottom: 1px solid hsl(0, 0%, 86%);
         background-color: hsl(0, 0%, 96%);
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        column-gap: 0.5rem;
         cursor: pointer;
-        display: flex;
-        justify-content: space-between;
       }
 
       .amenity-item > .name {
         font-size: 125%;
+        hyphens: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .amenity-item > .distance {
         color: #6a7071;
+        white-space: nowrap;
       }
 
       .amenity-item.-selected {
