@@ -10,7 +10,9 @@
   },
   "plugins": {
     "SplashScreen": {
-      "launchAutoHide": false
+      "launchAutoHide": false,
+      "backgroundColor": "#004996",
+      "spinnerColor": "#ffffff"
     }
   }
 }
