@@ -19,6 +19,18 @@ export class HomeView extends LitElement {
         justify-content: center;
         align-items: center;
       }
+
+      .logo {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        margin-bottom: 3rem;
+        object-fit: contain;
+      }
+
+      .button {
+        white-space: nowrap;
+      }
     `;
   }
 
@@ -29,8 +41,8 @@ export class HomeView extends LitElement {
    */
   render() {
     return html`<div class="banner">
-      <img src="${logo}" alt="Amenity Finder Logo" />
-      <mwc-button label="Start a search" outlined @click="${() => (window.location = '/search')}"></mwc-button>
+      <img src="${logo}" alt="Amenity Finder Logo" class="logo" />
+      <mwc-button label="Start a search" outlined @click="${() => (window.location = '/search')}" class="button"></mwc-button>
     </div>`;
   }
 }
