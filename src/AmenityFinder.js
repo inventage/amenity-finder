@@ -77,7 +77,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         top: calc(var(--amenity-finder-top-bar-height) + var(--safe-area-inset-top, 0));
         left: 0;
         right: 0;
-        z-index: 100;
+        z-index: 2;
       }
 
       @supports (padding-top: env(safe-area-inset-top)) {
