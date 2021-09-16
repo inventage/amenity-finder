@@ -44,6 +44,13 @@ export class AmenityBrowser extends LitElement {
         top: 0;
         right: 0;
       }
+
+      leaflet-map::part(popup-url) {
+        max-width: 24ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     `;
   }
 
