@@ -5,6 +5,7 @@ import html from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
+import copy from 'rollup-plugin-copy';
 
 import path from 'path';
 
@@ -31,6 +32,9 @@ export default {
     nodeResolve(),
     terser(),
     importMetaAssets(),
+    copy({
+      targets: [{ src: 'public/**', dest: 'dist', flatten: false }],
+    }),
     /** Compile JS to a lower language target */
     babel({
       babelHelpers: 'bundled',
