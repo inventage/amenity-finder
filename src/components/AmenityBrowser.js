@@ -1,5 +1,7 @@
 import { css, html, LitElement, nothing } from 'lit';
 import '@inventage/leaflet-map';
+import { Browser } from '@capacitor/browser';
+import { Capacitor } from '@capacitor/core';
 
 import './AmenityItem.js';
 
@@ -41,6 +43,18 @@ export class AmenityBrowser extends LitElement {
     this.amenities = [];
     this.markers = [];
     this.selectedMarker = null;
+
+    this._handleClick = this._handleClick.bind(this);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('click', this._handleClick);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.removeEventListener('click', this._handleClick);
   }
 
   updated(changedProperties) {
@@ -115,7 +129,7 @@ export class AmenityBrowser extends LitElement {
         id,
         lat: latitude,
         lon: longitude,
-        tags: { name: title },
+        tags: { name: title, website: url },
       } = result;
 
       return {
@@ -123,8 +137,32 @@ export class AmenityBrowser extends LitElement {
         latitude,
         longitude,
         title,
+        url,
       };
     });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async _handleClick(e) {
+    // Check if the click was issued inside a leaflet popup
+    const insideLeafletPopup = e.composedPath().filter(item => item.className === 'leaflet-popup-content').length > 0;
+    if (!insideLeafletPopup) {
+      return;
+    }
+
+    const [target] = e.composedPath();
+    if (!target.hasAttribute('href')) {
+      return;
+    }
+
+    if (!Capacitor.isNativePlatform()) {
+      return;
+    }
+
+    e.preventDefault();
+
+    const { href } = target;
+    await Browser.open({ url: href });
   }
 }
 
