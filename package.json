@@ -1,6 +1,6 @@
 {
   "name": "amenity-finder",
-  "description": "An amenity finder application that helps you find the right spot for the right occasion.",
+  "description": "An application that helps you find the right amenity around you.",
   "license": "MIT",
   "author": "amenity-finder",
   "version": "0.0.0",
