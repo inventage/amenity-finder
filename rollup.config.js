@@ -34,8 +34,8 @@ export default {
     importMetaAssets(),
     copy({
       targets: [
-        { src: 'public/assets', dest: 'dist', flatten: false },
-        { src: 'public/favicon.ico', dest: 'dist' },
+        { src: 'public/**', dest: 'dist', flatten: false },
+        { src: 'public/.well-known', dest: 'dist' },
       ],
     }),
     /** Compile JS to a lower language target */
