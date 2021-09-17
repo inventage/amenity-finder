@@ -10,7 +10,7 @@
     "build": "rimraf dist && rollup -c rollup.config.js --sourcemap --sourcemapExcludeSources",
     "build:ios": "npm run build && cap sync && replace-in-file --configFile=replace-build-ios-config.js",
     "postbuild": "cp dist/index.html dist/200.html",
-    "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
+    "start:build": "web-dev-server --root-dir dist --app-index index.html",
     "start": "web-dev-server",
     "start:ios": "cap open ios",
     "run:ios": "cap run ios --target FED691A6-4E90-4B89-879D-8423ABA339B2",
