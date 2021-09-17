@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" src="./assets/img/amenity-finder-logo.png"></img>
+  <img width="200" src="./public/assets/amenity-finder-logo.png"></img>
 </p>
 
 ## Amenity Finder
