@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.inventage.amenity_finder.twa",
+      "sha256_cert_fingerprints": [
+        "A3:DC:CF:80:B1:CC:F0:40:8A:39:15:53:DA:15:45:FF:9E:DF:DF:FC:16:61:09:1B:19:B5:4A:39:10:1B:51:21"
+      ]
+    }
+  }
+]
