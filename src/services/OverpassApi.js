@@ -1,4 +1,4 @@
-const DEFAULT_BASE_URL = 'https://overpass.osm.ch/api';
+const DEFAULT_BASE_URL = 'https://overpass-api.de/api';
 
 /**
  * Overpass API class
