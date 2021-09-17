@@ -1,5 +1,9 @@
 # PWA
 
+## General
+
+- A list of well known [`categories`](https://github.com/w3c/manifest/wiki/Categories)
+
 ## Google Play Store
 
 - [PWA Builder](https://www.pwabuilder.com/) → Store Package

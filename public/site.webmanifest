@@ -24,5 +24,12 @@
       "type": "image/png"
     }
   ],
-  "categories": ["navigation", "shopping", "lifestyle"]
+  "categories": ["navigation", "shopping", "lifestyle"],
+  "shortcuts" : [
+    {
+      "name": "Search Page",
+      "url": "/search",
+      "description": "Amenity search page"
+    }
+  ]
 }
