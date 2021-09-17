@@ -1,6 +1,6 @@
 {
   "name": "amenity-finder",
-  "description": "Webcomponent amenity-finder following open-wc recommendations",
+  "description": "An amenity finder application that helps you find the right spot for the right occasion.",
   "license": "MIT",
   "author": "amenity-finder",
   "version": "0.0.0",
