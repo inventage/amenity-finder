@@ -33,7 +33,10 @@ export default {
     terser(),
     importMetaAssets(),
     copy({
-      targets: [{ src: 'public/**', dest: 'dist', flatten: false }],
+      targets: [
+        { src: 'public/assets', dest: 'dist', flatten: false },
+        { src: 'public/favicon.ico', dest: 'dist' },
+      ],
     }),
     /** Compile JS to a lower language target */
     babel({
