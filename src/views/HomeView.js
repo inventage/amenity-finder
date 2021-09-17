@@ -3,7 +3,7 @@ import page from 'page';
 
 import '@material/mwc-button';
 
-const logo = new URL('../../assets/img/amenity-finder-logo.png', import.meta.url);
+const logo = new URL('../../public/assets/img/amenity-finder-logo.png', import.meta.url);
 
 export class HomeView extends LitElement {
   static get styles() {
