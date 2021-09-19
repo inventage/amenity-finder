@@ -5,6 +5,8 @@
 /dist/
 /coverage/
 /.tmp/
+/*.key
+/*.crt
 
 # https://github.com/ionic-team/cordova-res
 resources/android/icon
