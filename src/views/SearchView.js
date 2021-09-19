@@ -133,8 +133,6 @@ export class SearchView extends LitElement {
           coords: { latitude, longitude },
         } = position;
 
-        console.info('position', position);
-
         this.latitude = latitude;
         this.longitude = longitude;
       })

@@ -1,5 +1,6 @@
 import LatLon from 'geodesy/latlon-ellipsoidal-vincenty';
 import { Geolocation } from '@capacitor/geolocation';
+import { Capacitor } from '@capacitor/core';
 
 /**
  * Simple regex pattern (as string, so we can use it in the Constraint Validation API) for latitude / longitude.
@@ -14,18 +15,31 @@ const latLongRegexPatternString = '^-?\\d+(\\.\\d+)?$';
 /**
  * Function to detect a user's location, promise based.
  *
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
+ *
  * @returns {Promise<import('@capacitor/geolocation').Position>}
  */
 const detectUserLocation = async () => {
-  const hasPermissions = await Geolocation.checkPermissions();
-  if (!hasPermissions) {
-    const { location } = await Geolocation.requestPermissions();
-    if (location === 'denied') {
-      throw new Error('Geolocation not possible');
+  // Native platform = Capacitor
+  if (Capacitor.isNativePlatform()) {
+    const hasPermissions = await Geolocation.checkPermissions();
+    if (!hasPermissions) {
+      const { location } = await Geolocation.requestPermissions();
+      if (location === 'denied') {
+        throw new Error('Geolocation not possible');
+      }
     }
+
+    return Geolocation.getCurrentPosition();
   }
 
-  return Geolocation.getCurrentPosition();
+  // Fallback to normal Web API
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      position => resolve(position),
+      error => reject(error)
+    );
+  });
 };
 
 /**
