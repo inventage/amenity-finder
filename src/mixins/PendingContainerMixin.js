@@ -32,7 +32,7 @@ export const PendingContainer = (base, delayPromise = 0) =>
           await e.detail.promise;
           await delay(delayPromise); // Optional delay
         } catch (err) {
-          console.error(`Error in pending-state promise: ${err}`);
+          // Noop
         } finally {
           this.__pendingCount -= 1;
           this.__hasPendingChildren = this.__pendingCount !== 0;

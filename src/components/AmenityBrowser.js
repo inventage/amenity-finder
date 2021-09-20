@@ -12,8 +12,9 @@ export class AmenityBrowser extends LitElement {
       longitude: { type: String },
       radius: { type: Number },
       amenities: { type: Array },
-      markers: { type: Array, attribute: false },
-      selectedMarker: { type: Object, attribute: false },
+      markers: { state: true },
+      selectedMarker: { state: true },
+      loading: { state: true },
     };
   }
 
@@ -26,6 +27,11 @@ export class AmenityBrowser extends LitElement {
       .amenities:not(:empty) {
         width: 70ch;
         max-width: 40vw;
+      }
+
+      .loading-indicator {
+        opacity: 0.5;
+        padding: 1rem;
       }
 
       amenity-item {
@@ -60,6 +66,7 @@ export class AmenityBrowser extends LitElement {
     this.amenities = [];
     this.markers = [];
     this.selectedMarker = null;
+    this.loading = false;
 
     this._handleClick = this._handleClick.bind(this);
   }
@@ -83,7 +90,7 @@ export class AmenityBrowser extends LitElement {
   }
 
   render() {
-    return html`<div class="amenities">${this._renderAmenities()}</div>
+    return html`<div class="amenities">${this.loading ? html`<span class="loading-indicator">Loading…</span>` : this._renderAmenities()}</div>
       <leaflet-map
         .latitude="${this.latitude}"
         .longitude="${this.longitude}"

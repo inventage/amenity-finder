@@ -1,10 +1,12 @@
 import { css, html, LitElement, nothing } from 'lit';
+import '@material/mwc-icon';
 
 import '../components/AmenityBrowser.js';
 import '../components/AmenityItem.js';
 import { distanceBetween } from '../utils/geolocation.js';
 import { Requester } from '../mixins/RequesterMixin.js';
 import { sharedStyles } from '../common/globalStyles.js';
+import { delay } from '../utils/helpers.js';
 
 export class ResultsView extends Requester(LitElement) {
   static get properties() {
@@ -12,8 +14,9 @@ export class ResultsView extends Requester(LitElement) {
       latitude: { type: String },
       longitude: { type: String },
       radius: { type: Number },
-      results: { type: Array, attribute: false },
-      loading: { type: Boolean, attribute: false },
+      results: { state: true },
+      loading: { state: true },
+      reloading: { state: true },
     };
   }
 
@@ -32,7 +35,21 @@ export class ResultsView extends Requester(LitElement) {
           padding-left: var(--safe-area-inset-left, 0);
         }
 
-        amenity-browser {
+        .page-title {
+          display: flex;
+          align-items: center;
+        }
+
+        .page-title > .icon {
+          margin-left: 0.5rem;
+        }
+
+        .refresh-toggle {
+          cursor: pointer;
+        }
+
+        amenity-browser,
+        .reloading-placeholder {
           position: relative;
           overflow-y: auto;
           flex: 1;
@@ -50,6 +67,7 @@ export class ResultsView extends Requester(LitElement) {
     super();
     this.results = [];
     this.loading = false;
+    this.reloading = false;
   }
 
   connectedCallback() {
@@ -68,14 +86,20 @@ export class ResultsView extends Requester(LitElement) {
     }
 
     return html`<div class="upper">
-        <h1>Results</h1>
+        <h1 class="page-title">Results <mwc-icon class="icon refresh-toggle" @click="${this._refresh}">autorenew</mwc-icon></h1>
         <p>
           Displaying <strong>${this.results.length} results</strong> for <code>latitude</code> = <code>${this.latitude}</code>, <code>longitude</code> =
           <code>${this.longitude}</code> and <code>radius</code> = <code>${this.radius}</code>
         </p>
         <slot></slot>
       </div>
-      <amenity-browser .amenities="${this.results}" .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}"></amenity-browser>`;
+      <amenity-browser
+        .amenities="${this.results}"
+        .latitude="${this.latitude}"
+        .longitude="${this.longitude}"
+        .radius="${this.radius}"
+        .loading="${this.loading || this.reloading}"
+      ></amenity-browser>`;
   }
 
   _canSearch() {
@@ -104,6 +128,26 @@ export class ResultsView extends Requester(LitElement) {
       })
       .catch(err => console.error(err))
       .finally(() => (this.loading = false));
+  }
+
+  async _refresh(e) {
+    e.preventDefault();
+
+    if (this.loading) {
+      return;
+    }
+
+    this.results = [];
+    this.reloading = true;
+
+    try {
+      await this._fetchResults();
+      await delay(10000);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      this.reloading = false;
+    }
   }
 }
 
