@@ -31,6 +31,8 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
       :host {
         --amenity-container-padding: 1rem;
         --amenity-finder-top-bar-height: 56px;
+
+        --mdc-list-side-padding: calc(16px + var(--safe-area-inset-left));
       }
 
       @media (min-width: 600px) {
@@ -108,6 +110,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         mwc-drawer > [slot='title'] {
           position: relative;
           top: var(--safe-area-inset-top, 0);
+          padding-left: var(--safe-area-inset-left, 0);
         }
 
         mwc-list {

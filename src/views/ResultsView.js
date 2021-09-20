@@ -25,6 +25,11 @@ export class ResultsView extends Requester(LitElement) {
           width: 100%;
           display: flex;
           flex-direction: column;
+          font-size: 1rem;
+        }
+
+        .upper {
+          padding-left: var(--safe-area-inset-left, 0);
         }
 
         amenity-browser {

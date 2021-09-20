@@ -22,6 +22,10 @@ export default [
       margin-bottom: calc(var(--amenity-container-padding) * -1);
     }
 
+    .search-header {
+      padding-left: var(--safe-area-inset-left, 0);
+    }
+
     .search-header > .form {
       margin-bottom: 1rem;
     }

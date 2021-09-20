@@ -36,7 +36,9 @@
          * @see https://medium.com/@draganeror/iphone-x-layout-features-with-css-environment-variables-d57423433dec
          */
         --safe-area-inset-top: env(safe-area-inset-top);
+        --safe-area-inset-right: env(safe-area-inset-right);
         --safe-area-inset-bottom: env(safe-area-inset-bottom);
+        --safe-area-inset-left: env(safe-area-inset-left);
       }
 
       html,
@@ -46,6 +48,7 @@
         font-family: sans-serif;
         background-color: var(--amenity-finder-page-background-color);
         height: 100%;
+        /** @see https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/AdjustingtheTextSize/AdjustingtheTextSize.html#//apple_ref/doc/uid/TP40006510-SW16 */
         -webkit-text-size-adjust: 100%;
       }
 

@@ -30,7 +30,7 @@ export class SearchView extends LitElement {
   }
 
   render() {
-    return html`<div class="upper search-header">
+    return html`<div class="search-header">
         <h1>Search</h1>
 
         <div class="form search-form">
