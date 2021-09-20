@@ -83,9 +83,18 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
 
       .navigation-footer {
         display: flex;
+        flex-direction: column;
         padding: 2rem var(--mdc-list-side-padding, 16px) 0;
         font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
         font-size: 85%;
+      }
+
+      .navigation-footer > .item {
+        margin-bottom: 0.5rem;
+      }
+
+      .navigation-footer > .item:last-child {
+        margin-bottom: 0;
       }
 
       @supports (padding-top: env(safe-area-inset-top)) {
@@ -154,7 +163,8 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
           <mwc-list-item @click="${() => this._navigateToUrl('/results')}">Results</mwc-list-item>
         </mwc-list>
         <div class="navigation-footer">
-          <a href="/about">About</a>
+          <a href="/about" class="item">About</a>
+          <a href="/policy" class="item">Privacy Policy</a>
         </div>
 
         <div slot="appContent">
@@ -174,6 +184,8 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         return lazyLoad(import('./views/HomeView.js'), html`<home-view></home-view>`);
       case 'about':
         return lazyLoad(import('./views/AboutView.js'), html`<about-view></about-view>`);
+      case 'policy':
+        return lazyLoad(import('./views/PrivacyPolicyView.js'), html`<privacy-policy-view></privacy-policy-view>`);
       case 'search':
         return lazyLoad(
           import('./views/SearchView.js'),
@@ -217,6 +229,9 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
     });
     page('/about', () => {
       this.currentView = 'about';
+    });
+    page('/policy', () => {
+      this.currentView = 'policy';
     });
     page('/results', () => {
       if (this.alreadySearched) {

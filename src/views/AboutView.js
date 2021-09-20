@@ -1,4 +1,4 @@
-import { html, LitElement, nothing } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { until } from 'lit/directives/until.js';
 
 const licensesUrl = new URL('../../public/3rd-party-licenses.txt', import.meta.url);
@@ -20,6 +20,14 @@ export class AboutView extends LitElement {
     };
   }
 
+  static get styles() {
+    return css`
+      a {
+        color: var(--mdc-theme-primary);
+      }
+    `;
+  }
+
   constructor() {
     super();
     this.licenses = fetchData();
@@ -28,7 +36,7 @@ export class AboutView extends LitElement {
 
   render() {
     console.info(this.licenses);
-    return html`<h1>Amenity Finder</h1>
+    return html`<h1>About</h1>
       <p><a href="https://github.com/inventage/amenity-finder">https://github.com/inventage/amenity-finder</a></p>
       <p><a href="#" @click="${this._toggleShow}">Made possible by third-party software</a></p>
       ${!this.show
