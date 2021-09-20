@@ -6,7 +6,6 @@ import '@material/mwc-top-app-bar';
 import '@material/mwc-linear-progress';
 import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
-import '@material/mwc-icon';
 import '@material/mwc-icon-button';
 
 import { lazyLoad } from './directives/lazyLoadDirective.js';
@@ -98,17 +97,6 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
 
       .navigation-footer > .item:last-child {
         margin-bottom: 0;
-      }
-
-      .back-link {
-        margin: 1rem 0;
-        display: flex;
-        align-items: center;
-      }
-
-      .back-link > .icon {
-        color: var(--mdc-theme-primary);
-        margin-right: 0.25rem;
       }
 
       @supports (padding-top: env(safe-area-inset-top)) {
@@ -215,10 +203,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         return lazyLoad(
           import('./views/ResultsView.js'),
           html`<results-view .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}">
-            <p class="back-link">
-              <mwc-icon class="icon">chevron_left</mwc-icon>
-              <a href="${`/search/${this.latitude}/${this.longitude}/${this.radius}`}" class="link">Back to search</a>
-            </p>
+            <p><a href="${`/search/${this.latitude}/${this.longitude}/${this.radius}`}">← Back to search</a></p>
           </results-view>`
         );
       default:
