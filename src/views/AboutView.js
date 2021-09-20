@@ -2,14 +2,10 @@ import { css, html, LitElement, nothing } from 'lit';
 import { until } from 'lit/directives/until.js';
 
 const licensesUrl = new URL('../../public/3rd-party-licenses.txt', import.meta.url);
-console.info(licensesUrl);
 
 const fetchData = async () => {
   const response = await fetch(licensesUrl.pathname);
-  const text = await response.text();
-  // Add some delay for demo purposes
-  await new Promise(r => setTimeout(() => r(), 1000));
-  return text;
+  return response.text();
 };
 
 export class AboutView extends LitElement {
@@ -35,7 +31,6 @@ export class AboutView extends LitElement {
   }
 
   render() {
-    console.info(this.licenses);
     return html`<h1>About</h1>
       <p><a href="https://github.com/inventage/amenity-finder">https://github.com/inventage/amenity-finder</a></p>
       <p><a href="#" @click="${this._toggleShow}">Made possible by third-party software</a></p>
