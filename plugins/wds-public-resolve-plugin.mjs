@@ -1,5 +1,6 @@
 import { resolve } from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { globbySync } from 'globby';
 
 export const publicResolvePlugin = (publicPath = 'public') => {
@@ -8,6 +9,7 @@ export const publicResolvePlugin = (publicPath = 'public') => {
 
   return {
     name: 'resolve-public',
+    // eslint-disable-next-line consistent-return
     serve(context) {
       const pathWithoutLeadingSlash = context.path.replace(/^\//, '');
       const fileSystemPath = resolve(publicPath, pathWithoutLeadingSlash);

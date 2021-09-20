@@ -49,6 +49,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         display: flex;
         flex: 1;
         max-height: calc(100vh - var(--amenity-finder-top-bar-height) - var(--safe-area-inset-top, 0));
+        overflow: auto;
       }
 
       .sidebar {
@@ -78,6 +79,13 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         left: 0;
         right: 0;
         z-index: 2;
+      }
+
+      .navigation-footer {
+        display: flex;
+        padding: 2rem var(--mdc-list-side-padding, 16px) 0;
+        font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
+        font-size: 85%;
       }
 
       @supports (padding-top: env(safe-area-inset-top)) {
@@ -110,6 +118,15 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
     );
   }
 
+  updated(changedProperties) {
+    super.updated(changedProperties);
+
+    // Always close sidebar when view changes
+    if (changedProperties.has('currentView')) {
+      this.showSidebar = false;
+    }
+  }
+
   constructor() {
     super();
     this.showSidebar = false;
@@ -136,6 +153,10 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
           <mwc-list-item @click="${() => this._navigateToUrl('/search')}">Search</mwc-list-item>
           <mwc-list-item @click="${() => this._navigateToUrl('/results')}">Results</mwc-list-item>
         </mwc-list>
+        <div class="navigation-footer">
+          <a href="/about">About</a>
+        </div>
+
         <div slot="appContent">
           <mwc-top-app-bar>
             <mwc-icon-button icon="menu" slot="navigationIcon" @click="${this._toggleSidebar}"></mwc-icon-button>
@@ -151,6 +172,8 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
     switch (this.currentView) {
       case 'home':
         return lazyLoad(import('./views/HomeView.js'), html`<home-view></home-view>`);
+      case 'about':
+        return lazyLoad(import('./views/AboutView.js'), html`<about-view></about-view>`);
       case 'search':
         return lazyLoad(
           import('./views/SearchView.js'),
@@ -185,12 +208,15 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
   _navigateToUrl(url) {
     page(url);
 
-    this._closeSidebar();
+    this.showSidebar = false;
   }
 
   _initializeRoutes() {
     page('/', () => {
       this.currentView = 'home';
+    });
+    page('/about', () => {
+      this.currentView = 'about';
     });
     page('/results', () => {
       if (this.alreadySearched) {
