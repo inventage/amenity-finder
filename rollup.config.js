@@ -80,6 +80,7 @@ export default {
       globPatterns: ['**/*.{html,js,css,webmanifest,png,txt}'],
       skipWaiting: true,
       clientsClaim: true,
+      mode: 'production',
     }),
   ],
 };
