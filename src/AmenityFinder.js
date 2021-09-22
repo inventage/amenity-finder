@@ -167,7 +167,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
         </mwc-list>
         <div class="navigation-footer">
           <a href="/about" class="item">About</a>
-          <a href="/policy" class="item">Privacy Policy</a>
+          <a href="/privacy" class="item">Privacy Policy</a>
         </div>
 
         <div slot="appContent">
@@ -233,7 +233,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
     page('/about', () => {
       this.currentView = 'about';
     });
-    page('/policy', () => {
+    page('/privacy', () => {
       this.currentView = 'policy';
     });
     page('/results', () => {
