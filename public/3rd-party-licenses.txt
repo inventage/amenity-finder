@@ -128,9 +128,10 @@ SOFTWARE.
 
 The following NPM packages may be included in this product:
 
+ - @lit/reactive-element@1.0.0
  - @lit/reactive-element@1.0.0-rc.4
- - lit-element@3.0.0-rc.4
- - lit@2.0.0-rc.4
+ - lit-element@3.0.0
+ - lit@2.0.0
 
 These packages each contain the following license and notice below:
 
@@ -167,28 +168,28 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 The following NPM packages may be included in this product:
 
- - @material/animation@13.0.0-canary.864798678.0
- - @material/base@13.0.0-canary.864798678.0
- - @material/density@13.0.0-canary.864798678.0
- - @material/dom@13.0.0-canary.864798678.0
- - @material/drawer@13.0.0-canary.864798678.0
- - @material/elevation@13.0.0-canary.864798678.0
- - @material/feature-targeting@13.0.0-canary.864798678.0
- - @material/floating-label@13.0.0-canary.864798678.0
- - @material/line-ripple@13.0.0-canary.864798678.0
- - @material/linear-progress@13.0.0-canary.864798678.0
- - @material/list@13.0.0-canary.864798678.0
- - @material/notched-outline@13.0.0-canary.864798678.0
- - @material/progress-indicator@13.0.0-canary.864798678.0
- - @material/radio@13.0.0-canary.864798678.0
- - @material/ripple@13.0.0-canary.864798678.0
- - @material/rtl@13.0.0-canary.864798678.0
- - @material/shape@13.0.0-canary.864798678.0
- - @material/textfield@13.0.0-canary.864798678.0
- - @material/theme@13.0.0-canary.864798678.0
- - @material/top-app-bar@13.0.0-canary.864798678.0
- - @material/touch-target@13.0.0-canary.864798678.0
- - @material/typography@13.0.0-canary.864798678.0
+ - @material/animation@13.0.0-canary.65125b3a6.0
+ - @material/base@13.0.0-canary.65125b3a6.0
+ - @material/density@13.0.0-canary.65125b3a6.0
+ - @material/dom@13.0.0-canary.65125b3a6.0
+ - @material/drawer@13.0.0-canary.65125b3a6.0
+ - @material/elevation@13.0.0-canary.65125b3a6.0
+ - @material/feature-targeting@13.0.0-canary.65125b3a6.0
+ - @material/floating-label@13.0.0-canary.65125b3a6.0
+ - @material/line-ripple@13.0.0-canary.65125b3a6.0
+ - @material/linear-progress@13.0.0-canary.65125b3a6.0
+ - @material/list@13.0.0-canary.65125b3a6.0
+ - @material/notched-outline@13.0.0-canary.65125b3a6.0
+ - @material/progress-indicator@13.0.0-canary.65125b3a6.0
+ - @material/radio@13.0.0-canary.65125b3a6.0
+ - @material/ripple@13.0.0-canary.65125b3a6.0
+ - @material/rtl@13.0.0-canary.65125b3a6.0
+ - @material/shape@13.0.0-canary.65125b3a6.0
+ - @material/textfield@13.0.0-canary.65125b3a6.0
+ - @material/theme@13.0.0-canary.65125b3a6.0
+ - @material/top-app-bar@13.0.0-canary.65125b3a6.0
+ - @material/touch-target@13.0.0-canary.65125b3a6.0
+ - @material/typography@13.0.0-canary.65125b3a6.0
 
 These packages each contain the following license and notice below:
 
@@ -218,21 +219,21 @@ THE SOFTWARE.
 
 The following NPM packages may be included in this product:
 
- - @material/mwc-base@0.23.0
- - @material/mwc-button@0.23.0
- - @material/mwc-checkbox@0.23.0
- - @material/mwc-drawer@0.23.0
- - @material/mwc-floating-label@0.23.0
- - @material/mwc-icon-button@0.23.0
- - @material/mwc-icon@0.23.0
- - @material/mwc-line-ripple@0.23.0
- - @material/mwc-linear-progress@0.23.0
- - @material/mwc-list@0.23.0
- - @material/mwc-notched-outline@0.23.0
- - @material/mwc-radio@0.23.0
- - @material/mwc-ripple@0.23.0
- - @material/mwc-textfield@0.23.0
- - @material/mwc-top-app-bar@0.23.0
+ - @material/mwc-base@0.25.1
+ - @material/mwc-button@0.25.1
+ - @material/mwc-checkbox@0.25.1
+ - @material/mwc-drawer@0.25.1
+ - @material/mwc-floating-label@0.25.1
+ - @material/mwc-icon-button@0.25.1
+ - @material/mwc-icon@0.25.1
+ - @material/mwc-line-ripple@0.25.1
+ - @material/mwc-linear-progress@0.25.1
+ - @material/mwc-list@0.25.1
+ - @material/mwc-notched-outline@0.25.1
+ - @material/mwc-radio@0.25.1
+ - @material/mwc-ripple@0.25.1
+ - @material/mwc-textfield@0.25.1
+ - @material/mwc-top-app-bar@0.25.1
  - blocking-elements@0.1.1
 
 These packages each contain the following license and notice below:
@@ -695,68 +696,38 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 The following NPM package may be included in this product:
 
- - lit-html@2.0.0-rc.5
+ - lit-html@2.0.0
 
 This package contains the following license and notice below:
 
-# lit-html 2.0 Release Candidate
+BSD 3-Clause License
 
-Efficient, Expressive, Extensible HTML templates in JavaScript
+Copyright (c) 2017 Google LLC. All rights reserved.
 
-[![Build Status](https://github.com/lit/lit/workflows/Tests/badge.svg)](https://github.com/lit/lit/actions?query=workflow%3ATests)
-[![Published on npm](https://img.shields.io/npm/v/lit-html/next)](https://www.npmjs.com/package/lit-html)
-[![Join our Slack](https://img.shields.io/badge/slack-join%20chat-4a154b.svg)](https://www.polymer-project.org/slack-invite)
-[![Mentioned in Awesome Lit](https://awesome.re/mentioned-badge.svg)](https://github.com/web-padawan/awesome-lit)
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-lit-html is the template system that powers the [Lit](https://lit.dev) library for building fast web components.
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
 
-## About this release
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
 
-This release candidate of lit-html 2.0 is intended to be feature complete and API stable. Please note the minor breaking changes from lit-html 1.0 in the [lit.dev upgrade guide](https://lit.dev/docs/releases/upgrade/).
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
 
-## Documentation
-
-Full documentation is available at [lit.dev](https://lit.dev).
-
-## Overview
-
-`lit-html` lets you write [HTML templates](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) in JavaScript with [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
-
-lit-html templates are plain JavaScript and combine the familiarity of writing HTML with the power of JavaScript. lit-html takes care of efficiently rendering templates to DOM, including efficiently updating the DOM with new values.
-
-```javascript
-import {html, render} from 'lit-html';
-
-// This is a lit-html template function. It returns a lit-html template.
-const helloTemplate = (name) => html`<div>Hello ${name}!</div>`;
-
-// This renders <div>Hello Steve!</div> to the document body
-render(helloTemplate('Steve'), document.body);
-
-// This updates to <div>Hello Kevin!</div>, but only updates the ${name} part
-render(helloTemplate('Kevin'), document.body);
-```
-
-`lit-html` provides two main exports:
-
-- `html`: A JavaScript [template tag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_template_literals) used to produce a `TemplateResult`, which is a container for a template, and the values that should populate the template.
-- `render()`: A function that renders a `TemplateResult` to a DOM container, such as an element or shadow root.
-
-## Installation
-
-```bash
-$ npm install lit-html
-```
-
-Or use from `lit`:
-
-```bash
-$ npm install lit
-```
-
-## Contributing
-
-Please see [CONTRIBUTING.md](./CONTRIBUTING.md).
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -----------
 
@@ -1445,73 +1416,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
------------
-
-The following NPM package may be included in this product:
-
- - safe-area-insets@1.4.1
-
-This package contains the following license and notice below:
-
-# safeAreaInsets
-
-Use javascript to get the safe area insets.
-
-Chinese documentation : [中文文档](https://github.com/zhetengbiji/safeAreaInsets/blob/master/README-CH.md)
-
-## Precondition
-
-* WKWebview
-* viewport-fit=cover
-
-## Install
-
-### NPM
-
-```
-npm install safe-area-insets --save
-```
-
-### UMD
-
-```http
-https://unpkg.com/safe-area-insets/out/umd/index.min.js
-```
-
-## Use
-
-### Require
-
-```js
-const safeAreaInsets = require('safe-area-insets')
-```
-
-### Safe Area Info
-
-```js
-console.log('safeAreaInsets.support', safeAreaInsets.support)
-console.log('safe-area-inset-top', safeAreaInsets.top)
-console.log('safe-area-inset-left', safeAreaInsets.left)
-console.log('safe-area-inset-right', safeAreaInsets.right)
-console.log('safe-area-inset-bottom', safeAreaInsets.bottom)
-```
-
-### Listening Change Event
-
-```js
-function callback(style){
-    console.log(style)
-}
-// add
-safeAreaInsets.onChange(callback)
-// remove
-safeAreaInsets.offChange(callback)
-```
-
-## Related Reading
-
->[Designing Websites for iPhone X](https://webkit.org/blog/7929/designing-websites-for-iphone-x/)
 
 -----------
 
