@@ -12,10 +12,7 @@
 | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | [<img src="resources/pwa-badge.png" height="50">](https://amenity-finder.netlify.app) | [<img src="resources/google-play-badge.png" height="50">](https://play.google.com/store/apps/details?id=com.inventage.amenity_finder.twa) | [<img src="resources/appstore-badge.png" height="50">](https://apps.apple.com/us/app/amenity-finder/id1585945027) |
 
-## Scripts
+If you are feeling adventurous and want to get an early scoop of the features as they are being developed you can also sign up for our open beta testing here:
 
-- `start` runs your app for development, reloading on file changes
-- `start:build` runs your app after it has been built using the build command
-- `build` builds your app and outputs it in your `dist` directory
-- `test` runs your test suite with Karma
-- `lint` runs the linter for your project
+- [Android](https://play.google.com/apps/testing/com.inventage.amenity_finder.twa)
+- [iOS](https://testflight.apple.com/join/ZXTDTf9B)
