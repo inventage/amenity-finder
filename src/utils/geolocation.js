@@ -19,25 +19,26 @@ const latLongRegexPatternString = '^-?\\d+(\\.\\d+)?$';
  *
  * @returns {Promise<import('@capacitor/geolocation').Position>}
  */
-const detectUserLocation = async () => {
+const detectUserLocation = async (options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }) => {
   // Native platform = Capacitor
   if (Capacitor.isNativePlatform()) {
     const hasPermissions = await Geolocation.checkPermissions();
     if (!hasPermissions) {
-      const { location } = await Geolocation.requestPermissions();
-      if (location === 'denied') {
+      const { location: status } = await Geolocation.requestPermissions();
+      if (status === 'denied') {
         throw new Error('Geolocation not possible');
       }
     }
 
-    return Geolocation.getCurrentPosition();
+    return Geolocation.getCurrentPosition(options);
   }
 
   // Fallback to normal Web API
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
       position => resolve(position),
-      error => reject(error)
+      error => reject(error),
+      options
     );
   });
 };
