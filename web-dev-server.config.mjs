@@ -7,4 +7,7 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
   },
   appIndex: 'index.html',
   plugins: [publicResolvePlugin()],
+  http2: true,
+  sslKey: 'localhost.key',
+  sslCert: 'localhost.crt',
 });
