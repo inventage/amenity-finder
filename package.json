@@ -3,7 +3,7 @@
   "description": "An application that helps you find the right amenity around you.",
   "license": "MIT",
   "author": "amenity-finder",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "scripts": {
     "lint": "eslint --ext .js,.mjs,.html . --ignore-path .gitignore --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --check",
     "format": "eslint --ext .js,.mjs,.html . --fix --ignore-path .gitignore  --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --write",
