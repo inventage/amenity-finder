@@ -11,7 +11,7 @@ import replace from '@rollup/plugin-replace';
 import path from 'path';
 import pkg from './package.json';
 
-const BUILD_VERSION = process.env.BUILD_ID && process.env.COMMIT_REF ? `${pkg.version}-${process.env.BUILD_ID}-${process.env.COMMIT_REF}` : 'n/a';
+const BUILD_VERSION = process.env.BUILD_ID && process.env.COMMIT_REF ? `${pkg.version}-${process.env.BUILD_ID}-${process.env.COMMIT_REF.substr(0, 7)}` : 'n/a';
 console.info(`BUILD_VERSION = ${BUILD_VERSION}`);
 
 export default {
