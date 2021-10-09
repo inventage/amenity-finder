@@ -6,8 +6,12 @@ import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import { terser } from 'rollup-plugin-terser';
 import { generateSW } from 'rollup-plugin-workbox';
 import copy from 'rollup-plugin-copy';
+import replace from '@rollup/plugin-replace';
 
 import path from 'path';
+import pkg from './package.json';
+
+const BUILD_VERSION = process.env.BUILD_ID && process.env.COMMIT_REF ? `${pkg.version}-${process.env.BUILD_ID}-${process.env.COMMIT_REF}` : 'n/a';
 
 export default {
   input: 'index.html',
@@ -81,6 +85,10 @@ export default {
       skipWaiting: true,
       clientsClaim: true,
       mode: 'production',
+    }),
+    replace({
+      preventAssignment: false,
+      __BUILD_VERSION__: BUILD_VERSION,
     }),
   ],
 };

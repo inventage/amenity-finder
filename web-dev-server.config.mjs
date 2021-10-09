@@ -1,4 +1,8 @@
+import _replace from '@rollup/plugin-replace';
+import { fromRollup } from '@web/dev-server-rollup';
 import { publicResolvePlugin } from './plugins/wds-public-resolve-plugin.mjs';
+
+const replace = fromRollup(_replace);
 
 export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
   watch: true,
@@ -6,5 +10,11 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
     exportConditions: ['browser', 'development'],
   },
   appIndex: 'index.html',
-  plugins: [publicResolvePlugin()],
+  plugins: [
+    publicResolvePlugin(),
+    replace({
+      preventAssignment: false,
+      __BUILD_VERSION__: 'dev',
+    }),
+  ],
 });

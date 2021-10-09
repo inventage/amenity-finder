@@ -32,6 +32,7 @@ export class AboutView extends LitElement {
 
   render() {
     return html`<h1>About</h1>
+      <p>Version: <code>__BUILD_VERSION__</code></p>
       <p><a href="https://github.com/inventage/amenity-finder">https://github.com/inventage/amenity-finder</a></p>
       <p><a href="#" @click="${this._toggleShow}">Made possible by third-party software</a></p>
       ${!this.show
