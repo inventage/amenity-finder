@@ -11,10 +11,9 @@ import replace from '@rollup/plugin-replace';
 import path from 'path';
 import pkg from './package.json';
 
-const [date, time] = new Date().toISOString().split('T');
 const BUILD_VERSION =
   process.env.BUILD_ID && process.env.COMMIT_REF
-    ? `${pkg.version}-${date}-${time.split('.').shift()}-${process.env.BUILD_ID}-${process.env.COMMIT_REF.substr(0, 7)}`
+    ? `${pkg.version}-${new Date().toISOString()}-${process.env.BUILD_ID}-${process.env.COMMIT_REF.substr(0, 7)}`
     : 'n/a';
 console.info(`BUILD_VERSION = ${BUILD_VERSION}`);
 
