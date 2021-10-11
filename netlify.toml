@@ -9,4 +9,4 @@
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-    Content-Security-Policy = "default-src 'self'; img-src https://*; font-src fonts.gstatic.com; style-src 'self' fonts.googleapis.com 'unsafe-inline'; frame-src 'none'; worker-src 'self'"
+    Content-Security-Policy = "default-src 'self'; img-src data: https://*; font-src fonts.gstatic.com; style-src 'self' fonts.googleapis.com 'unsafe-inline'; frame-src 'none'; worker-src 'self'"
