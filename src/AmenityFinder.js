@@ -8,6 +8,8 @@ import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
 
+import '@pwabuilder/pwaupdate';
+
 import { lazyLoad } from './directives/lazyLoadDirective.js';
 import { Provider } from './mixins/ProviderMixin.js';
 import { OverpassApi } from './services/OverpassApi.js';
@@ -176,6 +178,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 250) {
             <div slot="title"><a href="/">Amenity Finder</a></div>
           </mwc-top-app-bar>
           <main>${this._renderCurrentView()}</main>
+          <pwa-update swpath="sw.js"></pwa-update>
         </div>
       </mwc-drawer>
     `;

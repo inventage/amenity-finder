@@ -36,6 +36,7 @@
     "@material/mwc-list": "^0.25.1",
     "@material/mwc-textfield": "^0.25.1",
     "@material/mwc-top-app-bar": "^0.25.1",
+    "@pwabuilder/pwaupdate": "^0.2.0",
     "geodesy": "^2.2.1",
     "lit": "^2.0.2",
     "page": "^1.11.6"
