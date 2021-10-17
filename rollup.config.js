@@ -13,7 +13,7 @@ import pkg from './package.json';
 
 const BUILD_VERSION =
   process.env.GITHUB_RUN_ID && process.env.GITHUB_SHA
-    ? `${pkg.version}-${new Date().toISOString()}-${process.env.BUILD_ID}-${process.env.GITHUB_SHA.substr(0, 7)}`
+    ? `${pkg.version}-${new Date().toISOString()}-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_SHA.substr(0, 7)}`
     : 'n/a';
 console.info(`BUILD_VERSION = ${BUILD_VERSION}`);
 
