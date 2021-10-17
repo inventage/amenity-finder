@@ -11,7 +11,10 @@
     "deploy": "npm run build && cp dist/index.html dist/200.html && surge --domain itchy-frog.surge.sh dist",
     "format": "eslint --ext .js,.mjs,.html . --fix --ignore-path .gitignore  --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --write",
     "postinstall": "generate-license-file --input package.json --output public/3rd-party-licenses.txt",
-    "lint": "eslint --ext .js,.mjs,.html . --ignore-path .gitignore --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --check",
+    "lint": "run-p -l lint:*",
+    "lint:eslint": "eslint --ext .js,.mjs,.html . --ignore-path .gitignore --ignore-pattern 'ios/**'",
+    "lint:prettier": "prettier \"**/*.{js,mjs,html}\" --check",
+    "lint:package-json": "npmPkgJsonLint .",
     "prepare": "is-ci || husky install",
     "run:ios": "cap run ios --target FED691A6-4E90-4B89-879D-8423ABA339B2",
     "start": "web-dev-server",
@@ -66,6 +69,9 @@
     "husky": "^7.0.2",
     "is-ci": "^3.0.0",
     "lint-staged": "^11.2.3",
+    "npm-package-json-lint": "^5.4.0",
+    "npm-package-json-lint-config-default": "^3.0.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.58.0",
@@ -97,7 +103,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "*.(m?)js": [
       "eslint --fix",
       "prettier --write"
     ]
