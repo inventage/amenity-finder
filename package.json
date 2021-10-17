@@ -1,25 +1,25 @@
 {
   "name": "amenity-finder",
+  "version": "1.1.0",
   "description": "An application that helps you find the right amenity around you.",
   "license": "MIT",
   "author": "amenity-finder",
-  "version": "1.1.0",
   "scripts": {
-    "lint": "eslint --ext .js,.mjs,.html . --ignore-path .gitignore --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --check",
-    "format": "eslint --ext .js,.mjs,.html . --fix --ignore-path .gitignore  --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --write",
     "build": "rimraf dist && rollup -c rollup.config.js --sourcemap --sourcemapExcludeSources",
     "build:ios": "npm run build && cap sync",
-    "postinstall": "generate-license-file --input package.json --output public/3rd-party-licenses.txt",
-    "start:build": "web-dev-server -c web-dev-server-ssl.config.mjs --root-dir dist",
-    "start": "web-dev-server",
-    "start:ssl": "web-dev-server -c web-dev-server-ssl.config.mjs",
-    "start:ios": "cap open ios",
-    "run:ios": "cap run ios --target FED691A6-4E90-4B89-879D-8423ABA339B2",
     "deploy": "npm run build && cp dist/index.html dist/200.html && surge --domain itchy-frog.surge.sh dist",
+    "format": "eslint --ext .js,.mjs,.html . --fix --ignore-path .gitignore  --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --write",
+    "postinstall": "generate-license-file --input package.json --output public/3rd-party-licenses.txt",
+    "lint": "eslint --ext .js,.mjs,.html . --ignore-path .gitignore --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --check",
+    "prepare": "is-ci || husky install",
+    "run:ios": "cap run ios --target FED691A6-4E90-4B89-879D-8423ABA339B2",
+    "start": "web-dev-server",
+    "start:build": "web-dev-server -c web-dev-server-ssl.config.mjs --root-dir dist",
+    "start:ios": "cap open ios",
+    "start:ssl": "web-dev-server -c web-dev-server-ssl.config.mjs",
     "test": "web-test-runner --coverage",
     "test:all": "npm run test -- --playwright --browsers chromium firefox webkit",
-    "test:watch": "web-test-runner --watch",
-    "prepare": "is-ci || husky install"
+    "test:watch": "web-test-runner --watch"
   },
   "dependencies": {
     "@capacitor/browser": "^1.0.5",
@@ -66,7 +66,6 @@
     "is-ci": "^3.0.0",
     "lint-staged": "^11.2.3",
     "prettier": "^2.4.1",
-    "replace-in-file": "^6.2.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.58.0",
     "rollup-plugin-copy": "^3.4.0",
@@ -74,6 +73,10 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-workbox": "^6.2.0"
   },
+  "engines": {
+    "npm": ">=7"
+  },
+  "customElements": "custom-elements.json",
   "eslintConfig": {
     "extends": [
       "@open-wc",
@@ -92,6 +95,12 @@
       ]
     }
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "prettier": {
     "singleQuote": true,
     "arrowParens": "avoid",
@@ -104,15 +113,5 @@
         }
       }
     ]
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write"
-    ]
-  },
-  "customElements": "custom-elements.json",
-  "engines": {
-    "npm": ">=7"
   }
 }
