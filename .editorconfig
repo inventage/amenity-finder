@@ -27,3 +27,4 @@ indent_size = 2
 block_comment_start = /**
 block_comment = *
 block_comment_end = */
+
