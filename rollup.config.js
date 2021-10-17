@@ -30,7 +30,7 @@ export default {
 
   plugins: [
     html({
-      minify: true,
+      minify: false,
       injectServiceWorker: true,
       serviceWorkerPath: 'dist/sw.js',
     }),
