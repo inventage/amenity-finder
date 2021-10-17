@@ -81,6 +81,7 @@
     "rollup-plugin-workbox": "^6.2.0"
   },
   "engines": {
+    "node": ">=16.0.0",
     "npm": ">=7"
   },
   "customElements": "custom-elements.json",
