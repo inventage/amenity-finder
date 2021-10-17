@@ -111,5 +111,8 @@
       "prettier --write"
     ]
   },
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "engines": {
+    "npm": ">=7"
+  }
 }
