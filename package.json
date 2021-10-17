@@ -10,7 +10,7 @@
     "build": "rimraf dist && rollup -c rollup.config.js --sourcemap --sourcemapExcludeSources",
     "build:ios": "npm run build && cap sync",
     "postinstall": "generate-license-file --input package.json --output public/3rd-party-licenses.txt",
-    "start:build": "web-dev-server -c web-dev-server-ssl.config.mjs --root-dir dist --app-index index.html",
+    "start:build": "web-dev-server -c web-dev-server-ssl.config.mjs --root-dir dist",
     "start": "web-dev-server",
     "start:ssl": "web-dev-server -c web-dev-server-ssl.config.mjs",
     "start:ios": "cap open ios",
