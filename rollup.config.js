@@ -8,7 +8,7 @@ import { generateSW } from 'rollup-plugin-workbox';
 import copy from 'rollup-plugin-copy';
 import replace from '@rollup/plugin-replace';
 
-import path from 'path';
+import path from 'node:path';
 import pkg from './package.json';
 
 const BUILD_VERSION =
