@@ -38,6 +38,7 @@
     "@material/mwc-icon-button": "^0.25.3",
     "@material/mwc-linear-progress": "^0.25.3",
     "@material/mwc-list": "^0.25.3",
+    "@material/mwc-select": "^0.25.3",
     "@material/mwc-textfield": "^0.25.3",
     "@material/mwc-top-app-bar": "^0.25.3",
     "@pwabuilder/pwaupdate": "^0.2.0",

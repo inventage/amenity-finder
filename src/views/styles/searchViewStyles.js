@@ -20,9 +20,13 @@ export default [
       margin-left: calc(var(--amenity-container-padding) * -1);
       margin-right: calc(var(--amenity-container-padding) * -1);
       margin-bottom: calc(var(--amenity-container-padding) * -1);
+      position: relative;
+      z-index: 1;
     }
 
     .search-header {
+      position: relative;
+      z-index: 2;
       padding-left: var(--safe-area-inset-left, 0);
     }
 
@@ -40,7 +44,7 @@ export default [
 
     .search-fields {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       grid-column-gap: var(--amenity-search-form-spacing);
     }
 
@@ -58,7 +62,7 @@ export default [
       }
 
       .search-fields {
-        grid-template-columns: repeat(3, minmax(auto, 15em));
+        grid-template-columns: repeat(3, minmax(auto, 1fr)) 4em;
       }
 
       .search-buttons {

@@ -14,6 +14,7 @@ export class ResultsView extends Requester(LitElement) {
       latitude: { type: String },
       longitude: { type: String },
       radius: { type: Number },
+      type: { type: String },
       results: { state: true },
       loading: { state: true },
       reloading: { state: true },
@@ -89,7 +90,7 @@ export class ResultsView extends Requester(LitElement) {
         <h1 class="page-title">Results <mwc-icon class="icon refresh-toggle" @click="${this._refresh}">autorenew</mwc-icon></h1>
         <p>
           Displaying <strong>${this.results.length} results</strong> for <code>latitude</code> = <code>${this.latitude}</code>, <code>longitude</code> =
-          <code>${this.longitude}</code> and <code>radius</code> = <code>${this.radius}</code>
+          <code>${this.longitude}</code>, <code>radius</code> = <code>${this.radius}</code> and <code>type</code> = <code>${this.type}</code></code>
         </p>
         <slot></slot>
       </div>
@@ -108,7 +109,7 @@ export class ResultsView extends Requester(LitElement) {
 
   async _fetchResults() {
     this.loading = true;
-    const resultsPromise = this.api.getNodeByLatLng(this.latitude, this.longitude, this.radius);
+    const resultsPromise = this.api.getNodeByLatLng(this.latitude, this.longitude, this.radius, this.type);
     this.dispatchEvent(
       new CustomEvent('pending-state', {
         composed: true,

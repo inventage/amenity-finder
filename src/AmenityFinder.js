@@ -12,7 +12,7 @@ import '@pwabuilder/pwaupdate';
 
 import { lazyLoad } from './directives/lazyLoadDirective.js';
 import { Provider } from './mixins/ProviderMixin.js';
-import { OverpassApi } from './services/OverpassApi.js';
+import { DEFAULT_AMENITY_TYPE, OverpassApi } from './services/OverpassApi.js';
 import { PendingContainer } from './mixins/PendingContainerMixin.js';
 
 export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
@@ -24,6 +24,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
       latitude: { type: String },
       longitude: { type: String },
       radius: { type: Number },
+      type: { type: String },
       rendered: { type: Boolean, reflect: true },
     };
   }
@@ -150,6 +151,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
     this.latitude = '47.3902';
     this.longitude = '8.5158';
     this.radius = 1000;
+    this.type = DEFAULT_AMENITY_TYPE.type;
 
     this._initializeRoutes();
 
@@ -199,14 +201,15 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
             .latitude="${this.latitude}"
             .longitude="${this.longitude}"
             .radius="${this.radius}"
+            .type="${this.type}"
             @execute-search="${e => this._onExecuteSearch(e)}"
           ></search-view>`
         );
       case 'results':
         return lazyLoad(
           import('./views/ResultsView.js'),
-          html`<results-view .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}">
-            <p><a href="${`/search/${this.latitude}/${this.longitude}/${this.radius}`}">← Back to search</a></p>
+          html`<results-view .latitude="${this.latitude}" .longitude="${this.longitude}" .radius="${this.radius}" .type="${this.type}">
+            <p><a href="${`/search/${this.latitude}/${this.longitude}/${this.radius}/${this.type}`}">← Back to search</a></p>
           </results-view>`
         );
       default:
@@ -241,7 +244,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
     });
     page('/results', () => {
       if (this.alreadySearched) {
-        page.redirect(`/results/${this.latitude}/${this.longitude}/${this.radius}`);
+        page.redirect(`/results/${this.latitude}/${this.longitude}/${this.radius}/${this.type}`);
         return;
       }
 
@@ -249,7 +252,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
     });
     page('/results', () => {
       if (this.alreadySearched) {
-        page.redirect(`/results/${this.latitude}/${this.longitude}/${this.radius}`);
+        page.redirect(`/results/${this.latitude}/${this.longitude}/${this.radius}/${this.type}`);
         return;
       }
 
@@ -257,25 +260,25 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
     });
     page('/results', () => {
       if (this.alreadySearched) {
-        page.redirect(`/results/${this.latitude}/${this.longitude}/${this.radius}`);
+        page.redirect(`/results/${this.latitude}/${this.longitude}/${this.radius}/${this.type}`);
         return;
       }
 
       page.redirect('/search');
     });
-    page('/results/:lat/:lon/:radius', ctx => {
+    page('/results/:lat/:lon/:radius/:type', ctx => {
       this._setSearchParametersFromRouteContext(ctx);
       this.currentView = 'results';
     });
     page('/search', () => {
       if (this.alreadySearched) {
-        page.redirect(`/search/${this.latitude}/${this.longitude}/${this.radius}`);
+        page.redirect(`/search/${this.latitude}/${this.longitude}/${this.radius}/${this.type}`);
         return;
       }
 
       this.currentView = 'search';
     });
-    page('/search/:lat/:lon/:radius', ctx => {
+    page('/search/:lat/:lon/:radius/:type', ctx => {
       this._setSearchParametersFromRouteContext(ctx);
       this.currentView = 'search';
     });
@@ -287,21 +290,22 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
 
   // eslint-disable-next-line class-methods-use-this
   _onExecuteSearch(e) {
-    page(`/results/${e.detail.latitude}/${e.detail.longitude}/${e.detail.radius}`);
+    page(`/results/${e.detail.latitude}/${e.detail.longitude}/${e.detail.radius}/${e.detail.type}`);
   }
 
   _setSearchParametersFromRouteContext(ctx) {
     const {
-      params: { radius, lat, lon },
+      params: { radius, lat, lon, type },
     } = ctx;
 
-    if (!radius || !lat || !lon) {
+    if (!radius || !lat || !lon || !type) {
       return;
     }
 
     this.radius = radius;
     this.latitude = lat;
     this.longitude = lon;
+    this.type = type;
     this.alreadySearched = true;
   }
 }
