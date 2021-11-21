@@ -8,7 +8,7 @@ import '@inventage/leaflet-map';
 import { detectUserLocation, latLongRegexPatternString } from '../utils/geolocation.js';
 import styles from './styles/searchViewStyles.js';
 import { MAX_SEARCH_RADIUS } from '../common/config.js';
-import { DEFAULT_AMENITY_TYPE, OSM_AMENITY_TYPES } from '../services/OverpassApi.js';
+import { OSM_AMENITY_TYPES } from '../services/OverpassApi.js';
 
 export class SearchView extends LitElement {
   static get properties() {
