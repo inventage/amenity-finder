@@ -117,14 +117,11 @@ export class AmenityBrowser extends LitElement {
     }
 
     return html`${this.amenities.map(result => {
-      const {
-        id,
-        distance,
-        tags: { name },
-      } = result;
+      const { id, distance } = result;
 
       return html`<amenity-item
-        .name="${name}"
+        .name="${AmenityBrowser.__getDisplayNameForAmenity(result)}"
+        .subtitle="${id}"
         .distance="${distance}"
         .selected="${this.selectedMarker && this.selectedMarker.id === id}"
         @click="${() => this._selectMarker(id)}"
@@ -153,14 +150,14 @@ export class AmenityBrowser extends LitElement {
         id,
         lat: latitude,
         lon: longitude,
-        tags: { name: title, website: url },
+        tags: { website: url },
       } = result;
 
       return {
         id,
         latitude,
         longitude,
-        title,
+        title: AmenityBrowser.__getDisplayNameForAmenity(result),
         url,
       };
     });
@@ -187,6 +184,12 @@ export class AmenityBrowser extends LitElement {
 
     const { href } = target;
     await Browser.open({ url: href });
+  }
+
+  static __getDisplayNameForAmenity(amenity = {}) {
+    const { tags: { name, 'name:en': nameEn, operator, description, wikidata } = {} } = amenity;
+
+    return name || nameEn || operator || wikidata || description;
   }
 }
 

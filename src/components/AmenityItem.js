@@ -6,6 +6,7 @@ export class AmenityItem extends LitElement {
   static get properties() {
     return {
       name: { type: String },
+      subtitle: { type: String },
       distance: { type: String },
       selected: { type: Boolean },
     };
@@ -35,6 +36,10 @@ export class AmenityItem extends LitElement {
         white-space: nowrap;
       }
 
+      .amenity-item > .subtitle {
+        color: #6a7071;
+      }
+
       .amenity-item.-selected {
         background-color: hsl(0, 0%, 92%);
       }
@@ -49,18 +54,20 @@ export class AmenityItem extends LitElement {
     super();
 
     this.name = '';
+    this.subtitle = '';
     this.distance = '';
     this.selected = false;
   }
 
   render() {
-    if (!this.name) {
+    if (!this.name && !this.distance && this.subtitle) {
       return nothing;
     }
 
     return html`<div class="amenity-item ${classMap({ '-selected': this.selected })}">
       <span class="name">${this.name}</span>
       <span class="distance">${formatDistance(this.distance)}</span>
+      ${this.subtitle ? html`<span class="subtitle">${this.subtitle}</span>` : nothing}
     </div>`;
   }
 }
