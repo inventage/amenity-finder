@@ -3,8 +3,10 @@ import '@material/mwc-button';
 import '@material/mwc-textfield';
 import '@material/mwc-select';
 import '@material/mwc-list/mwc-list-item';
+import '@material/mwc-icon';
 import '@inventage/leaflet-map';
 
+import { classMap } from 'lit/directives/class-map.js';
 import { detectUserLocation, latLongRegexPatternString } from '../utils/geolocation.js';
 import styles from './styles/searchViewStyles.js';
 import { MAX_SEARCH_RADIUS } from '../common/config.js';
@@ -76,10 +78,10 @@ export class SearchView extends LitElement {
               @invalid="${e => (this.formValid = e.target.validity.valid)}"
               @change="${e => this._handleFieldInput(e, 'radius')}"
             ></mwc-textfield>
-            <mwc-button outlined icon="my_location" @click="${this._handleLocateMeClick}" .disabled="${this.isLocating}"></mwc-button>
+            <mwc-icon @click="${this._handleLocateMeClick}" class="location-button ${classMap({ '-disabled': this.isLocating || true })}">my_location</mwc-icon>
           </div>
           <div class="search-buttons">
-            <mwc-select outlined label="outlined" @change="${e => this._handleFieldInput(e, 'type')}">
+            <mwc-select outlined label="Type" @change="${e => this._handleFieldInput(e, 'type')}">
               ${Object.values(OSM_AMENITY_TYPES).map(
                 amenity => html` <mwc-list-item value="${amenity.type}" .selected="${amenity.type === this.type}">${amenity.label}</mwc-list-item> `
               )}

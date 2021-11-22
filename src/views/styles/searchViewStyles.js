@@ -30,10 +30,6 @@ export default [
       padding-left: var(--safe-area-inset-left, 0);
     }
 
-    .search-header > .form {
-      margin-bottom: 1rem;
-    }
-
     .search-form {
       display: grid;
       grid-template-rows: 1fr 1fr;
@@ -44,14 +40,27 @@ export default [
 
     .search-fields {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr) auto;
       grid-column-gap: var(--amenity-search-form-spacing);
+      align-items: center;
+      margin-bottom: 1rem;
     }
 
     .search-buttons {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-column-gap: var(--amenity-search-form-spacing);
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .location-button {
+      color: var(--mdc-theme-primary, #6200ee);
+      cursor: pointer;
+    }
+
+    .location-button[disabled] {
+      opacity: 0.5;
     }
 
     @media (min-width: 768px) {
