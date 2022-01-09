@@ -14,6 +14,7 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
     publicResolvePlugin(),
     replace({
       preventAssignment: false,
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
       __BUILD_VERSION__: 'dev',
     }),
   ],

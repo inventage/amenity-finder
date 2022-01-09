@@ -170,12 +170,14 @@ The following NPM packages may be included in this product:
 
  - @material/animation@14.0.0-canary.261f2db59.0
  - @material/base@14.0.0-canary.261f2db59.0
+ - @material/button@14.0.0-canary.261f2db59.0
  - @material/density@14.0.0-canary.261f2db59.0
  - @material/dom@14.0.0-canary.261f2db59.0
  - @material/drawer@14.0.0-canary.261f2db59.0
  - @material/elevation@14.0.0-canary.261f2db59.0
  - @material/feature-targeting@14.0.0-canary.261f2db59.0
  - @material/floating-label@14.0.0-canary.261f2db59.0
+ - @material/icon-button@14.0.0-canary.261f2db59.0
  - @material/line-ripple@14.0.0-canary.261f2db59.0
  - @material/linear-progress@14.0.0-canary.261f2db59.0
  - @material/list@14.0.0-canary.261f2db59.0
@@ -188,8 +190,10 @@ The following NPM packages may be included in this product:
  - @material/rtl@14.0.0-canary.261f2db59.0
  - @material/select@14.0.0-canary.261f2db59.0
  - @material/shape@14.0.0-canary.261f2db59.0
+ - @material/snackbar@14.0.0-canary.261f2db59.0
  - @material/textfield@14.0.0-canary.261f2db59.0
  - @material/theme@14.0.0-canary.261f2db59.0
+ - @material/tokens@14.0.0-canary.261f2db59.0
  - @material/top-app-bar@14.0.0-canary.261f2db59.0
  - @material/touch-target@14.0.0-canary.261f2db59.0
  - @material/typography@14.0.0-canary.261f2db59.0
@@ -237,6 +241,7 @@ The following NPM packages may be included in this product:
  - @material/mwc-radio@0.25.3
  - @material/mwc-ripple@0.25.3
  - @material/mwc-select@0.25.3
+ - @material/mwc-snackbar@0.25.3
  - @material/mwc-textfield@0.25.3
  - @material/mwc-top-app-bar@0.25.3
  - blocking-elements@0.1.1
@@ -449,28 +454,6 @@ Apache License
 
 The following NPM package may be included in this product:
 
- - @pwabuilder/pwaupdate@0.2.0
-
-This package contains the following license and notice below:
-
-ManifoldJS
-
-Copyright (c) Microsoft Corporation
-
-All rights reserved.
-
-MIT License
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
------------
-
-The following NPM package may be included in this product:
-
  - @queso/debounce@1.1.0
 
 This package contains the following license and notice below:
@@ -586,6 +569,21 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+-----------
+
+The following NPM package may be included in this product:
+
+ - idb@6.1.5
+
+This package contains the following license and notice below:
+
+ISC License (ISC)
+Copyright (c) 2016, Jake Archibald <jaffathecake@gmail.com>
+
+Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 -----------
 
@@ -1479,6 +1477,41 @@ under the
 
 Contributions to Specifications are made under the
 [W3C CLA](https://www.w3.org/community/about/agreements/cla/).
+
+-----------
+
+The following NPM packages may be included in this product:
+
+ - workbox-cacheable-response@6.4.1
+ - workbox-core@6.4.1
+ - workbox-expiration@6.4.1
+ - workbox-precaching@6.4.1
+ - workbox-recipes@6.4.1
+ - workbox-routing@6.4.1
+ - workbox-strategies@6.4.1
+ - workbox-window@6.4.1
+
+These packages each contain the following license and notice below:
+
+Copyright 2018 Google LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
 -----------
 

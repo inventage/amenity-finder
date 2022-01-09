@@ -4,11 +4,10 @@ import summary from 'rollup-plugin-summary';
 import html from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import { terser } from 'rollup-plugin-terser';
-import { generateSW } from 'rollup-plugin-workbox';
+import { injectManifest } from 'rollup-plugin-workbox';
 import copy from 'rollup-plugin-copy';
 import replace from '@rollup/plugin-replace';
 
-import path from 'node:path';
 import pkg from './package.json';
 
 const BUILD_VERSION =
@@ -31,8 +30,8 @@ export default {
   plugins: [
     html({
       minify: false,
-      injectServiceWorker: true,
-      serviceWorkerPath: 'dist/sw.js',
+      injectServiceWorker: false,
+      // serviceWorkerPath: 'dist/sw.js',
     }),
     summary({
       showMinifiedSize: false,
@@ -77,21 +76,18 @@ export default {
         ],
       ],
     }),
-    /** Create and inject a service worker */
-    generateSW({
-      navigateFallback: '/index.html',
-      // where to output the generated sw
-      swDest: path.join('dist', 'sw.js'),
-      // directory to match patterns against to be precached
-      globDirectory: path.join('dist'),
-      // cache any html js and css by default
+    // @see https://github.com/modernweb-dev/web/tree/master/packages/rollup-plugin-workbox
+    // @see https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.injectManifest
+    injectManifest({
+      swSrc: '.tmp/sw.js',
+      swDest: 'dist/sw.js',
+      globDirectory: 'dist',
       globPatterns: ['**/*.{html,js,css,webmanifest,png,txt}'],
-      skipWaiting: true,
-      clientsClaim: true,
-      mode: 'production',
+      // globIgnores: ['robots.txt'],
     }),
     replace({
       preventAssignment: false,
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
       __BUILD_VERSION__: BUILD_VERSION,
     }),
   ],

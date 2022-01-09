@@ -8,12 +8,12 @@ import '@material/mwc-list/mwc-list.js';
 import '@material/mwc-list/mwc-list-item.js';
 import '@material/mwc-icon-button';
 
-import '@pwabuilder/pwaupdate';
-
 import { lazyLoad } from './directives/lazyLoadDirective.js';
 import { Provider } from './mixins/ProviderMixin.js';
 import { DEFAULT_AMENITY_TYPE, OverpassApi } from './services/OverpassApi.js';
 import { PendingContainer } from './mixins/PendingContainerMixin.js';
+
+import './components/PwaUpdater.js';
 
 export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
   static get properties() {
@@ -26,6 +26,7 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
       radius: { type: Number },
       type: { type: String },
       rendered: { type: Boolean, reflect: true },
+      hasUpdate: { type: Boolean },
     };
   }
 
@@ -142,6 +143,16 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
     }
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('app-update-available', this._handleAppUpdate);
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener('app-update-available', this._handleAppUpdate);
+    super.disconnectedCallback();
+  }
+
   constructor() {
     super();
     this.showSidebar = false;
@@ -157,6 +168,8 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
 
     // Provide services
     this.provideInstance('api', new OverpassApi());
+
+    this._handleAppUpdate = this._handleAppUpdate.bind(this);
   }
 
   render() {
@@ -180,9 +193,9 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
             <div slot="title"><a href="/">Amenity Finder</a></div>
           </mwc-top-app-bar>
           <main>${this._renderCurrentView()}</main>
-          <pwa-update swpath="sw.js"></pwa-update>
         </div>
       </mwc-drawer>
+      ${this.hasUpdate ? html`<pwa-updater></pwa-updater>` : false}
     `;
   }
 
@@ -307,6 +320,10 @@ export class AmenityFinder extends PendingContainer(Provider(LitElement), 0) {
     this.longitude = lon;
     this.type = type;
     this.alreadySearched = true;
+  }
+
+  _handleAppUpdate() {
+    this.hasUpdate = true;
   }
 }
 

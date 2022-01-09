@@ -6,9 +6,13 @@
   "author": "Inventage AG <info@inventage.com>",
   "repository": "github:inventage/amenity-finder",
   "scripts": {
-    "build": "rimraf dist && rollup -c rollup.config.js --sourcemap --sourcemapExcludeSources",
+    "clean": "rimraf dist .tmp",
+    "build": "npm run clean && npm run build:sw && npm run build:app",
+    "build:dev": "npm run clean && cross-env NODE_ENV=development npm run build:sw && cross-env NODE_ENV=development npm run build:app",
+    "build:app": "rollup -c rollup.config.js --sourcemap --sourcemapExcludeSources",
+    "build:sw": "rollup -c rollup.config-sw.js --sourcemap --sourcemapExcludeSources",
     "build:ios": "npm run build && cap sync",
-    "deploy": "npm run build && cp dist/index.html dist/200.html && surge --domain itchy-frog.surge.sh dist",
+    "deploy": "npm run build && cp dist/index.html dist/200.html && surge --domain stiff-existence.surge.sh dist",
     "format": "eslint --ext .js,.mjs,.html . --fix --ignore-path .gitignore  --ignore-pattern 'ios/**' && prettier \"**/*.{js,mjs,html}\" --write",
     "postinstall": "generate-license-file --input package.json --output public/3rd-party-licenses.txt",
     "lint": "run-p -l lint:*",
@@ -18,7 +22,7 @@
     "prepare": "is-ci || husky install",
     "run:ios": "cap run ios --target FED691A6-4E90-4B89-879D-8423ABA339B2",
     "start": "web-dev-server",
-    "start:build": "web-dev-server -c web-dev-server-ssl.config.mjs --root-dir dist",
+    "start:build": "npm run build:dev && cross-env NODE_ENV=development web-dev-server -c web-dev-server-ssl.config.mjs --root-dir dist",
     "start:ios": "cap open ios",
     "start:ssl": "web-dev-server -c web-dev-server-ssl.config.mjs",
     "test": "web-test-runner --coverage",
@@ -39,12 +43,17 @@
     "@material/mwc-linear-progress": "^0.25.3",
     "@material/mwc-list": "^0.25.3",
     "@material/mwc-select": "^0.25.3",
+    "@material/mwc-snackbar": "^0.25.3",
     "@material/mwc-textfield": "^0.25.3",
     "@material/mwc-top-app-bar": "^0.25.3",
-    "@pwabuilder/pwaupdate": "^0.2.0",
     "geodesy": "^2.2.1",
     "lit": "^2.0.2",
-    "page": "^1.11.6"
+    "page": "^1.11.6",
+    "workbox-core": "^6.3.0",
+    "workbox-precaching": "^6.3.0",
+    "workbox-recipes": "^6.3.0",
+    "workbox-routing": "^6.3.0",
+    "workbox-window": "^6.3.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.4",
@@ -54,6 +63,7 @@
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-replace": "^3.0.0",
+    "@types/workbox-sw": "^4.3.2",
     "@web/dev-server": "^0.1.28",
     "@web/dev-server-rollup": "^0.3.13",
     "@web/rollup-plugin-html": "^1.10.1",
@@ -61,6 +71,7 @@
     "@web/test-runner": "^0.13.22",
     "@web/test-runner-playwright": "^0.8.8",
     "babel-plugin-template-html-minifier": "^4.1.0",
+    "cross-env": "^7.0.3",
     "deepmerge": "^4.2.2",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
@@ -102,8 +113,26 @@
             "error"
           ]
         }
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": [
+            "rollup*.js",
+            "web-dev*.mjs",
+            "**/*test*.js"
+          ]
+        }
       ]
-    }
+    },
+    "overrides": [
+      {
+        "files": "src/sw.js",
+        "env": {
+          "serviceworker": true
+        }
+      }
+    ]
   },
   "lint-staged": {
     "*.(m?)js": [
