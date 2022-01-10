@@ -23,31 +23,30 @@ const hideSplashScreen = () => {
       throw new Error('Could not find app DOM element!');
     }
 
-    // Hide when app has rendered initially
-    appElement.addEventListener('rendered', hideSplashScreen);
+    // Things to do as soon as the app (shell) has rendered for the first time
+    appElement.addEventListener('rendered', () => {
+      // Hide when app has rendered initially
+      hideSplashScreen();
+
+      // Initialize service worker
+      if ('serviceWorker' in navigator) {
+        const wb = new Workbox('./sw.js');
+
+        // @see https://dev.to/webmaxru/workbox-4-implementing-refresh-to-update-version-flow-using-the-workbox-window-module-4e3c
+        wb.addEventListener('installed', event => {
+          if (event.isUpdate) {
+            document.dispatchEvent(new Event('app-update-available'));
+          }
+        });
+
+        wb.register()
+          .then(value => console.info('Service worker registered.', value))
+          .catch(e => console.error('Service worker registration failed.', e));
+      }
+    });
 
     // Load entry component
     await import('./AmenityFinder.js');
-
-    // setTimeout(() => {
-    //   document.dispatchEvent(new Event('app-update-available'));
-    // }, 0);
-
-    // Initialize service worker
-    if ('serviceWorker' in navigator) {
-      const wb = new Workbox('./sw.js');
-
-      // @see https://dev.to/webmaxru/workbox-4-implementing-refresh-to-update-version-flow-using-the-workbox-window-module-4e3c
-      wb.addEventListener('installed', event => {
-        if (event.isUpdate) {
-          document.dispatchEvent(new Event('app-update-available'));
-        }
-      });
-
-      wb.register()
-        .then(value => console.info('Service worker registered.', value))
-        .catch(e => console.error('Service worker registration failed.', e));
-    }
   } catch (e) {
     console.error('An error occurred when initializing the application:', e);
     hideSplashScreen();
