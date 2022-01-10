@@ -128,10 +128,10 @@ SOFTWARE.
 
 The following NPM packages may be included in this product:
 
- - @lit/reactive-element@1.0.0
  - @lit/reactive-element@1.0.0-rc.4
- - lit-element@3.0.0
- - lit@2.0.2
+ - @lit/reactive-element@1.1.1
+ - lit-element@3.1.1
+ - lit@2.1.1
 
 These packages each contain the following license and notice below:
 
@@ -514,36 +514,6 @@ MIT License
 
 The following NPM package may be included in this product:
 
- - amenity-finder@1.2.0
-
-This package contains the following license and notice below:
-
-MIT License
-
-Copyright (c) 2021 amenity-finder
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
------------
-
-The following NPM package may be included in this product:
-
  - geodesy@2.2.1
 
 This package contains the following license and notice below:
@@ -721,7 +691,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 The following NPM package may be included in this product:
 
- - lit-html@2.0.0
+ - lit-html@2.1.1
 
 This package contains the following license and notice below:
 
@@ -1482,14 +1452,14 @@ Contributions to Specifications are made under the
 
 The following NPM packages may be included in this product:
 
- - workbox-cacheable-response@6.4.1
- - workbox-core@6.4.1
- - workbox-expiration@6.4.1
- - workbox-precaching@6.4.1
- - workbox-recipes@6.4.1
- - workbox-routing@6.4.1
- - workbox-strategies@6.4.1
- - workbox-window@6.4.1
+ - workbox-cacheable-response@6.4.2
+ - workbox-core@6.4.2
+ - workbox-expiration@6.4.2
+ - workbox-precaching@6.4.2
+ - workbox-recipes@6.4.2
+ - workbox-routing@6.4.2
+ - workbox-strategies@6.4.2
+ - workbox-window@6.4.2
 
 These packages each contain the following license and notice below:
 
