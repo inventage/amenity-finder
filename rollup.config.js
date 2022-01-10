@@ -13,7 +13,7 @@ import pkg from './package.json';
 const BUILD_VERSION =
   process.env.GITHUB_RUN_ID && process.env.GITHUB_SHA
     ? `${pkg.version}-${new Date().toISOString()}-${process.env.GITHUB_RUN_ID}-${process.env.GITHUB_SHA.substr(0, 7)}`
-    : 'n/a';
+    : process.env.BUILD_VERSION || 'n/a';
 console.info(`BUILD_VERSION = ${BUILD_VERSION}`);
 
 export default {
@@ -82,7 +82,7 @@ export default {
       swSrc: '.tmp/sw.js',
       swDest: 'dist/sw.js',
       globDirectory: 'dist',
-      globPatterns: ['**/*.{html,js,css,webmanifest,png,txt}'],
+      globPatterns: ['**/*.{html,js,css,webmanifest,png,txt,map}'],
       // globIgnores: ['robots.txt'],
     }),
     replace({
