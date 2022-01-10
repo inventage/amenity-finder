@@ -1,6 +1,6 @@
 name: Main Workflow
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   lint:
@@ -43,7 +43,7 @@ jobs:
   build:
     name: Build & Deploy
     runs-on: ubuntu-latest
-    needs: [lint, test]
+    needs: [ lint, test ]
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
@@ -57,11 +57,24 @@ jobs:
           npm ci
           npm run build
 
+      # Sets the branch name as environment variable
+      - uses: nelonoel/branch-name@v1.0.1
+
       - name: Deploy to netlify
-        uses: netlify/actions/cli@master
+        uses: jsmrcaga/action-netlify-deploy@v1.7.2
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_DEPLOY_MESSAGE: Preview ${{ env.BRANCH_NAME }}
+          build_directory: dist
+          deploy_alias: ${{ env.BRANCH_NAME }}
+          NETLIFY_DEPLOY_TO_PROD: ${{ env.BRANCH_NAME == 'master' }}
+
+      - name: Status check
+        uses: Sibz/github-status-action@v1.1.6
         with:
-          args: deploy --dir=dist --prod
+          authToken: ${{ secrets.GITHUB_TOKEN }}
+          context: Netlify Site
+          state: success
+          target_url: https://${{ env.BRANCH_NAME }}--amenity-finder.netlify.app
 
