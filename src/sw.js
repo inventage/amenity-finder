@@ -1,8 +1,8 @@
 /* eslint-disable no-restricted-globals */
 import { clientsClaim } from 'workbox-core';
 import { googleFontsCache } from 'workbox-recipes';
-import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
-import { registerRoute, NavigationRoute } from 'workbox-routing';
+import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
+import { NavigationRoute, registerRoute } from 'workbox-routing';
 
 googleFontsCache();
 
@@ -14,7 +14,9 @@ clientsClaim();
 self.skipWaiting();
 
 // For injecting manifest
-precacheAndRoute(self.__WB_MANIFEST);
+precacheAndRoute(self.__WB_MANIFEST, {
+  cleanUrls: false,
+});
 
 // Fallback to index.html
 // @see https://stackoverflow.com/a/66882056
