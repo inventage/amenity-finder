@@ -88,6 +88,7 @@ export default {
     replace({
       preventAssignment: false,
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+      __ENABLE_SW__: true,
       __BUILD_VERSION__: BUILD_VERSION,
     }),
   ],

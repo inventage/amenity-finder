@@ -29,7 +29,7 @@ const hideSplashScreen = () => {
       hideSplashScreen();
 
       // Initialize service worker
-      if ('serviceWorker' in navigator) {
+      if ('__ENABLE_SW__' === 'true' && 'serviceWorker' in navigator) {
         const wb = new Workbox('./sw.js');
 
         // @see https://dev.to/webmaxru/workbox-4-implementing-refresh-to-update-version-flow-using-the-workbox-window-module-4e3c
