@@ -58,9 +58,10 @@ jobs:
           npm run build
 
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.2
+        uses: nwtgck/actions-netlify@v2.0.0
         with:
           publish-dir: './dist'
+          netlify-config-path: "./netlify.toml"
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
